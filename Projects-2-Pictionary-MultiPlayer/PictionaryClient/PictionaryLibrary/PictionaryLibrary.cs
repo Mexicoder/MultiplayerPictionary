@@ -76,6 +76,7 @@ namespace PictionaryLibrary
             updateAllUsers();
         }
 
+        // TODO: make this return all line later
         public string GetLine()
         {
             return drawLine;
