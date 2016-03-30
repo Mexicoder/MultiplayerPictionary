@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DrawCanvasBoard" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="User_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <cdp:CompositeDuplex xmlns:cdp="http://schemas.microsoft.com/net/2006/06/duplex" />
+        <ow:OneWay xmlns:ow="http://schemas.microsoft.com/ws/2005/05/routing/policy" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:12000/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:12000/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUser_Join_InputMessage">
+    <wsdl:part name="parameters" element="tns:Join" />
+  </wsdl:message>
+  <wsdl:message name="IUser_Join_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUser_Leave_InputMessage">
+    <wsdl:part name="parameters" element="tns:Leave" />
+  </wsdl:message>
+  <wsdl:message name="IUser_PostLine_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostLine" />
+  </wsdl:message>
+  <wsdl:message name="IUser_GetLine_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLine" />
+  </wsdl:message>
+  <wsdl:message name="IUser_GetLine_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUser_SendLine_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendLine" />
+  </wsdl:message>
+  <wsdl:portType name="IUser">
+    <wsdl:operation name="Join">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUser/Join" message="tns:IUser_Join_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUser/JoinResponse" message="tns:IUser_Join_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Leave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUser/Leave" message="tns:IUser_Leave_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostLine">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUser/PostLine" message="tns:IUser_PostLine_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLine">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUser/GetLine" message="tns:IUser_GetLine_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUser/GetLineResponse" message="tns:IUser_GetLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendLine">
+      <wsdl:output wsaw:Action="http://tempuri.org/IUser/SendLine" message="tns:IUser_SendLine_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="User" type="tns:IUser">
+    <wsp:PolicyReference URI="#User_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Join">
+      <soap12:operation soapAction="http://tempuri.org/IUser/Join" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Leave">
+      <soap12:operation soapAction="http://tempuri.org/IUser/Leave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="PostLine">
+      <soap12:operation soapAction="http://tempuri.org/IUser/PostLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetLine">
+      <soap12:operation soapAction="http://tempuri.org/IUser/GetLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendLine">
+      <soap12:operation soapAction="http://tempuri.org/IUser/SendLine" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DrawCanvasBoard">
+    <wsdl:port name="User" binding="tns:User">
+      <soap12:address location="http://localhost:12000/PictionaryLibrary/User" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:12000/PictionaryLibrary/User</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -72,6 +72,7 @@ namespace PictionaryClient
                 drawPoint = e.GetPosition(whiteBoard);
 
                 whiteBoard.Children.Add(line);
+
             }
         }
 

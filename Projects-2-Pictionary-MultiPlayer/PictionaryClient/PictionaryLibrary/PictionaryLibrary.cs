@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 
 namespace PictionaryLibrary
 {
     public interface IUserCallback
     {
         [OperationContract(IsOneWay = true)]
-        void SendCanvas(Canvas canvas);
+        void SendLine(string jsonLine);
     }
 
     /*----------------------------------- Service Contracts ----------------------------------*/
@@ -25,9 +27,9 @@ namespace PictionaryLibrary
         [OperationContract(IsOneWay = true)]
         void Leave(string name);
         [OperationContract(IsOneWay = true)]
-        void PostCanvas(Canvas canvas);
+        void PostLine(string jsonLine);
         [OperationContract]
-        Canvas GetCanvas();
+        string GetLine();
     }
 
     /*--------------------------------- Service Implementation -------------------------------*/
@@ -36,7 +38,7 @@ namespace PictionaryLibrary
     public class DrawCanvasBoard : IUser
     {
         private Dictionary<string, IUserCallback> userCallbacks = new Dictionary<string, IUserCallback>();
-        private Canvas drawCanvas;
+        private string drawLine;
 
         /*----------------------------------- IUser methods ----------------------------------*/
 
@@ -53,7 +55,7 @@ namespace PictionaryLibrary
 
                 // Save alias and callback proxy    
                 userCallbacks.Add(name.ToUpper(), cb);
-                drawCanvas = new Canvas();
+                //drawLine = new string();
 
                 return true;
             }
@@ -64,19 +66,19 @@ namespace PictionaryLibrary
             if (userCallbacks.ContainsKey(name.ToUpper()))
             {
                 userCallbacks.Remove(name.ToUpper());
-                drawCanvas = new Canvas();
+                //drawLine = new string();
             }
         }
 
-        public void PostCanvas(Canvas canvas)
+        public void PostLine(string jsonLine)
         {
-            drawCanvas = canvas;
+            drawLine = jsonLine;
             updateAllUsers();
         }
 
-        public Canvas GetCanvas()
+        public string GetLine()
         {
-            return drawCanvas;
+            return drawLine;
         }
 
         /*---------------------------------- Helper methods ----------------------------------*/
@@ -84,9 +86,9 @@ namespace PictionaryLibrary
         private void updateAllUsers()
         {
             //TODO try getting rid of this 
-            Canvas c = drawCanvas;
+            string c = drawLine;
             foreach (IUserCallback cb in userCallbacks.Values)
-                cb.SendCanvas(c);
+                cb.SendLine(c);
         }
 
 
