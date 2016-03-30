@@ -1,0 +1,49 @@
+﻿<Window x:Class="PictionaryClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PictionaryClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="1070">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+            <Image x:Name="redMarker" Source="img/MarkerRed.png" Width="100" Margin="5" MouseDown="redMarker_MouseDown"/>
+            <Image x:Name="orangeMarker" Source="img/MarkerOrange.png" Width="100" Margin="5" MouseDown="orangeMarker_MouseDown"/>
+            <Image x:Name="yellowMarker" Source="img/MarkerYellow.png" Width="100" Margin="5" MouseDown="yellowMarker_MouseDown"/>
+            <Image x:Name="greenMarker" Source="img/MarkerGreen.png" Width="100" Margin="5" MouseDown="greenMarker_MouseDown"/>
+            <Image x:Name="blueMarker" Source="img/MarkerBlue.png" Width="100" Margin="5" MouseDown="blueMarker_MouseDown"/>
+            <Image x:Name="purpleMarker" Source="img/MarkerPurple.png" Width="100" Margin="5" MouseDown="purpleMarker_MouseDown"/>
+            <Image x:Name="brownMarker" Source="img/MarkerBrown.png" Width="100" Margin="5" MouseDown="brownMarker_MouseDown"/>
+            <Image x:Name="greyMarker" Source="img/MarkerGrey.png" Width="100" Margin="5" MouseDown="greyMarker_MouseDown"/>
+            <Image x:Name="blackMarker" Source="img/MarkerBlack.png" Width="100" Margin="5" MouseDown="blackMarker_MouseDown"/>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Hint:" Margin="10" FontSize="16" FontWeight="Bold"/>
+                <TextBlock x:Name="hint" Text="{Binding MyHintProperty}" Margin="10, 10,50,10" FontSize="16" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="Marker Thickness" Canvas.Left="867" Canvas.Top="507" FontSize="14" FontWeight="Bold" Foreground="Gray"/>
+                <Slider x:Name="thicknessSlider" Minimum="1" Maximum="40" Width="100" Canvas.Left="877" Canvas.Top="487" Value="{Binding MyMarkerThicknessProperty, Mode=TwoWay}" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Image Source="img/WhiteBoard.png"/>
+            <Canvas  Name="whiteBoard"  MouseDown="whiteBoard_mouseDown" MouseMove="Canvas_MouseMove_1" Width="900" Height="500" >
+
+                <Image x:Name="eraser" Source="img/eraser2.png"  Canvas.Left="114" Canvas.Top="463" MouseDown="eraser_MouseDown"/>
+                <Canvas.Background>
+                    <SolidColorBrush Color="White" Opacity="0"/>
+                </Canvas.Background>
+            </Canvas>
+        </Grid>
+
+
+    </Grid>
+</Window>

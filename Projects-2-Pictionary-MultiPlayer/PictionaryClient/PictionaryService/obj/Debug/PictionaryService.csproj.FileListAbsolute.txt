@@ -1,0 +1,8 @@
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryService.exe.config
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryService.exe
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryService.pdb
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryLibrary.dll
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryLibrary.pdb
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\obj\Debug\PictionaryService.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\obj\Debug\PictionaryService.exe
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\obj\Debug\PictionaryService.pdb

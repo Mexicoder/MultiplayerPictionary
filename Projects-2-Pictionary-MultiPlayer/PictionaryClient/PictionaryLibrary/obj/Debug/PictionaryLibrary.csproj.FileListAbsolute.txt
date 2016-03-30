@@ -1,0 +1,5 @@
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryLibrary\bin\Debug\PictionaryLibrary.dll
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryLibrary\bin\Debug\PictionaryLibrary.pdb
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryLibrary\obj\Debug\PictionaryLibrary.dll
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryLibrary\obj\Debug\PictionaryLibrary.pdb
+C:\Users\Alex\Desktop\CPA Level 5\Tony.NET\Projects\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryLibrary\obj\Debug\PictionaryLibrary.csprojResolveAssemblyReference.cache
