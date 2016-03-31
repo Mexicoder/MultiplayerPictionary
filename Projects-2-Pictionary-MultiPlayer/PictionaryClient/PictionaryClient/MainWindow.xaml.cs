@@ -112,6 +112,18 @@ namespace PictionaryClient
                 line.X2 = e.GetPosition(whiteBoard).X;
                 line.Y2 = e.GetPosition(whiteBoard).Y;
 
+                string serializedLine = new JavaScriptSerializer().Serialize(new JsonLine()
+                {
+                    Color = MyColorProperty.Color.ToString(),
+                    StrokeThickness = line.StrokeThickness,
+                    X1 = line.X1,
+                    Y1 = line.Y1,
+                    X2 = line.X2,
+                    Y2 = line.Y2
+                });
+
+                _cnvsBrd.PostLine(serializedLine);
+
                 _drawPoint = e.GetPosition(whiteBoard);
 
                 whiteBoard.Children.Add(line);
@@ -119,8 +131,7 @@ namespace PictionaryClient
             }
         }
 
-
-
+        #region Dependencies
 
         public SolidColorBrush MyColorProperty
         {
@@ -155,10 +166,11 @@ namespace PictionaryClient
 
         // Using a DependencyProperty as the backing store for MyMarkerThicknessProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyMarkerThicknessPropertyProperty =
+
             DependencyProperty.Register("MyMarkerThicknessProperty", typeof(double), typeof(MainWindow), new PropertyMetadata(5.0));
+        #endregion
 
-
-
+        #region Colors
         private void redMarker_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MyColorProperty = Brushes.Red;
@@ -208,6 +220,7 @@ namespace PictionaryClient
         {
             MyColorProperty = Brushes.Purple;
         }
+        #endregion 
 
         public delegate void CanvasUpdateDelegate(string jsonLine);
 
@@ -217,9 +230,9 @@ namespace PictionaryClient
             {
                 try
                 {
-                    Line line = new JavaScriptSerializer().Deserialize<Line>(jsonLine);
+                    var customLine = new JavaScriptSerializer().Deserialize<JsonLine>(jsonLine);
 
-                    whiteBoard.Children.Add(line);
+                    whiteBoard.Children.Add(JsonLine.LineDeserialize(customLine));
                 }
                 catch (Exception ex)
                 {

@@ -45,10 +45,13 @@ namespace PictionaryLibrary
         public bool Join(string name)
         {
             if (userCallbacks.ContainsKey(name.ToUpper()))
+            {
                 // User alias must be unique
                 return false;
+            }
             else
             {
+                Console.WriteLine("User join");
 
                 // Retrieve client's callback proxy
                 IUserCallback cb = OperationContext.Current.GetCallbackChannel<IUserCallback>();
@@ -66,12 +69,16 @@ namespace PictionaryLibrary
             if (userCallbacks.ContainsKey(name.ToUpper()))
             {
                 userCallbacks.Remove(name.ToUpper());
+                Console.WriteLine("User leave");
+
                 //drawLine = new string();
             }
         }
 
         public void PostLine(string jsonLine)
         {
+            Console.WriteLine("drawLine Post");
+
             drawLine = jsonLine;
             updateAllUsers();
         }
@@ -80,6 +87,8 @@ namespace PictionaryLibrary
         public string GetLine()
         {
             return drawLine;
+            Console.WriteLine("drawLine get");
+
         }
 
         /*---------------------------------- Helper methods ----------------------------------*/
@@ -88,6 +97,7 @@ namespace PictionaryLibrary
         {
             //TODO try getting rid of this 
             string c = drawLine;
+            Console.WriteLine("drawLine callback");
             foreach (IUserCallback cb in userCallbacks.Values)
                 cb.SendLine(c);
         }
