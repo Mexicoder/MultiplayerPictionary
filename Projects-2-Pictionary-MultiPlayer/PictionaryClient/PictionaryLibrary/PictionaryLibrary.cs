@@ -15,6 +15,9 @@ namespace PictionaryLibrary
     {
         [OperationContract(IsOneWay = true)]
         void SendLine(string jsonLine);
+        [OperationContract(IsOneWay = true)]
+        void SendWord();
+
     }
 
     /*----------------------------------- Service Contracts ----------------------------------*/
@@ -73,7 +76,7 @@ namespace PictionaryLibrary
         public void PostLine(string jsonLine)
         {
             drawLine = jsonLine;
-            updateAllUsers();
+            updateAllUsersCanvas();
         }
 
         public string GetLine()
@@ -83,7 +86,7 @@ namespace PictionaryLibrary
 
         /*---------------------------------- Helper methods ----------------------------------*/
 
-        private void updateAllUsers()
+        private void updateAllUsersCanvas()
         {
             //TODO try getting rid of this 
             string c = drawLine;
