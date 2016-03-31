@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PictionaryClient.ServiceReference1 {
+namespace PictionaryClient.PictionaryServiceRef {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IUser", CallbackContract=typeof(PictionaryClient.ServiceReference1.IUserCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PictionaryServiceRef.IUser", CallbackContract=typeof(PictionaryClient.PictionaryServiceRef.IUserCallback))]
     public interface IUser {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/Join", ReplyAction="http://tempuri.org/IUser/JoinResponse")]
@@ -48,12 +48,12 @@ namespace PictionaryClient.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserChannel : PictionaryClient.ServiceReference1.IUser, System.ServiceModel.IClientChannel {
+    public interface IUserChannel : PictionaryClient.PictionaryServiceRef.IUser, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserClient : System.ServiceModel.DuplexClientBase<PictionaryClient.ServiceReference1.IUser>, PictionaryClient.ServiceReference1.IUser {
+    public partial class UserClient : System.ServiceModel.DuplexClientBase<PictionaryClient.PictionaryServiceRef.IUser>, PictionaryClient.PictionaryServiceRef.IUser {
         
         public UserClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
