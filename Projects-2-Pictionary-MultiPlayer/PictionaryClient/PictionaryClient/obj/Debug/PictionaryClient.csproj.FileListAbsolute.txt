@@ -70,3 +70,5 @@ C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryCli
 C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryClient\obj\Debug\PictionaryClient.csproj.GenerateResource.Cache
 C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryClient\obj\Debug\WelcomeSplash.g.cs
 C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryClient\obj\Debug\WelcomeSplash.baml
+C:\College\$Winter - S5 - 2016\Components .Net\Projects\Projects-2-Pictionary-MultiPlayer\MultiplayerPictionary\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryClient\obj\Debug\WelcomeSplash.g.cs
+C:\College\$Winter - S5 - 2016\Components .Net\Projects\Projects-2-Pictionary-MultiPlayer\MultiplayerPictionary\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryClient\obj\Debug\WelcomeSplash.baml
