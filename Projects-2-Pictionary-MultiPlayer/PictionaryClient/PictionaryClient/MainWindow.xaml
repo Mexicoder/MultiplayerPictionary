@@ -30,7 +30,7 @@
         <Grid Grid.Row="1">            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Hint:" Margin="10" FontSize="16" FontWeight="Bold"/>
-                <TextBlock x:Name="hint" Text="{Binding MyHintProperty}" Margin="10, 10,50,10" FontSize="16" FontWeight="Bold"/>
+                <TextBlock x:Name="hint" Text="{Binding WordProperty}" Margin="10, 10,50,10" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
                 <TextBlock Text="Marker Thickness" Canvas.Left="867" Canvas.Top="507" FontSize="14" FontWeight="Bold" Foreground="Gray"/>
