@@ -37,6 +37,14 @@ namespace PictionaryLibrary
             dwList.Add(new DrawWord("LASER", "NOUN", "_ _ _ _ _", "L _ _ _ _"));
             dwList.Add(new DrawWord("WOBBLE", "VERB", "_ _ _ _ _ _", "W _ _ _ _ _"));
             dwList.Add(new DrawWord("SKI GOGGLES", "NOUN", "_ _ _  _ _ _ _ _ _ _", "S _ _  G _ _ _ _ _ _"));
+            dwList.Add(new DrawWord("MAIL MAN", "NOUN", "_ _ _ _  _ _ _ ", "M _ _ _  M _ _"));
+            dwList.Add(new DrawWord("SONG", "NOUN", "_ _ _ _ ", "S _ _ _"));
+            dwList.Add(new DrawWord("WAX", "NOUN", "_ _ _", "W _ _"));
+            dwList.Add(new DrawWord("WAND", "NOUN", "_ _ _ _", "W _ _ _"));
+            dwList.Add(new DrawWord("WAX", "NOUN", "_ _ _", "W _ _"));
+            dwList.Add(new DrawWord("HONEYMOON", "NOUN", "_ _ _ _ _  _ _ _ _", "H _ _ _ _  M _ _ _"));
+            dwList.Add(new DrawWord("NEW YEAR", "NOUN", "_ _ _  _ _ _ _", "N _ _  Y _ _ _"));
+
             return dwList;
         }
 
