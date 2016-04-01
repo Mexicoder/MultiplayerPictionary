@@ -12,32 +12,23 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>        
-            <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Center" >                
-                <Image x:Name="redMarker" Source="img/MarkerRed.png" Width="90" Margin="5" MouseDown="redMarker_MouseDown"/>
-                <Image x:Name="orangeMarker" Source="img/MarkerOrange.png" Width="90" Margin="5" MouseDown="orangeMarker_MouseDown"/>
-                <Image x:Name="yellowMarker" Source="img/MarkerYellow.png" Width="90" Margin="5" MouseDown="yellowMarker_MouseDown"/>
-                <Image x:Name="greenMarker" Source="img/MarkerGreen.png" Width="90" Margin="5" MouseDown="greenMarker_MouseDown"/>
-                <Image x:Name="blueMarker" Source="img/MarkerBlue.png" Width="90" Margin="5" MouseDown="blueMarker_MouseDown"/>
-                <Image x:Name="purpleMarker" Source="img/MarkerPurple.png" Width="90" Margin="5" MouseDown="purpleMarker_MouseDown"/>
-                <Image x:Name="brownMarker" Source="img/MarkerBrown.png" Width="90" Margin="5" MouseDown="brownMarker_MouseDown"/>
-                <Image x:Name="greyMarker" Source="img/MarkerGrey.png" Width="90" Margin="5" MouseDown="greyMarker_MouseDown"/>
-                <Image x:Name="blackMarker" Source="img/MarkerBlack.png" Width="90" Margin="5" MouseDown="blackMarker_MouseDown"/>
-                <Image x:Name="eraser" Source="img/eraser2.png" Width="90" MouseDown="eraser_MouseDown" HorizontalAlignment="Left"/>
-            </StackPanel>          
+                    
        
-        <Grid Grid.Row="1">            
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+                <TextBlock Text="Guess Word:" FontSize="20" FontWeight="Bold" />
+                <TextBox x:Name="GuessTB" Width="200" FontSize="16" Margin="10,0,10,0"/>
+                <Button Content="Submit" FontSize="16" FontWeight="Bold" Padding="10,0,10,0" ></Button>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Hint:" Margin="10" FontSize="16" FontWeight="Bold"/>
                 <TextBlock x:Name="hint" Text="{Binding MyHintProperty}" Margin="10, 10,50,10" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
-            <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
-                <TextBlock Text="Marker Thickness" Canvas.Left="867" Canvas.Top="507" FontSize="14" FontWeight="Bold" Foreground="Gray"/>
-                <Slider x:Name="thicknessSlider" Minimum="1" Maximum="40" Width="100" Canvas.Left="877" Canvas.Top="487" Value="{Binding MyMarkerThicknessProperty, Mode=TwoWay}" />
-            </StackPanel>
         </Grid>
-        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="10" Margin="20" >
+        
+        
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="10" Margin="20,20,20,0" >
             <Border BorderBrush="Black" BorderThickness="10" >            
                 <Canvas  Name="whiteBoard"  MouseDown="whiteBoard_mouseDown" MouseMove="Canvas_MouseMove_1"  Height="500" >
                     <Canvas.Background>
@@ -46,15 +37,30 @@
                 </Canvas>           
             </Border>
         </Border>
+        
+        
         <Grid Grid.Row="3">
-            <Image Source="img/WhiteBoard.png" />
-        </Grid>
-        <Grid Grid.Row="4">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
-                <TextBlock Text="Guess Word:" FontSize="20" FontWeight="Bold" />
-                <TextBox x:Name="GuessTB" Width="200" FontSize="16" Margin="10,0,10,0"/>
-                <Button Content="Submit Guess" FontSize="16" FontWeight="Bold" Padding="10,0,10,0" ></Button>
-            </StackPanel>            
-        </Grid>
+            <StackPanel Orientation="Vertical">           
+                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Center" >
+                    <Image x:Name="eraser" Source="img/eraser2.png" Width="110" MouseDown="eraser_MouseDown" HorizontalAlignment="Left" />
+                    <Image x:Name="redMarker" Source="img/MarkerRed.png" Width="90" Margin="5,0,0,-20" MouseDown="redMarker_MouseDown"/>
+                    <Image x:Name="orangeMarker" Source="img/MarkerOrange.png" Width="90" Margin="5,0,0,-20" MouseDown="orangeMarker_MouseDown"/>
+                    <Image x:Name="yellowMarker" Source="img/MarkerYellow.png" Width="90" Margin="5,0,0,-20" MouseDown="yellowMarker_MouseDown"/>
+                    <Image x:Name="greenMarker" Source="img/MarkerGreen.png" Width="90" Margin="5,0,0,-20" MouseDown="greenMarker_MouseDown"/>
+                    <Image x:Name="blueMarker" Source="img/MarkerBlue.png" Width="90" Margin="5,0,0,-20" MouseDown="blueMarker_MouseDown"/>
+                    <Image x:Name="purpleMarker" Source="img/MarkerPurple.png" Width="90" Margin="5,0,0,-20" MouseDown="purpleMarker_MouseDown"/>
+                    <Image x:Name="brownMarker" Source="img/MarkerBrown.png" Width="90" Margin="5,0,0,-20" MouseDown="brownMarker_MouseDown"/>
+                    <Image x:Name="greyMarker" Source="img/MarkerGrey.png" Width="90" Margin="5,0,0,-20" MouseDown="greyMarker_MouseDown"/>
+                    <Image x:Name="blackMarker" Source="img/MarkerBlack.png" Width="90" Margin="5,0,0,-20" MouseDown="blackMarker_MouseDown"/>                    
+                </StackPanel>
+                <Image Source="img/WhiteBoard.png"/>
+                
+                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock Text="Marker Thickness" Canvas.Left="867" Canvas.Top="507" FontSize="14" FontWeight="Bold" Foreground="Gray"/>
+                    <Slider x:Name="thicknessSlider" Minimum="1" Maximum="40" Width="100" Canvas.Left="877" Canvas.Top="487" Value="{Binding MyMarkerThicknessProperty, Mode=TwoWay}" />
+                </StackPanel>
+                <Button Content="Clear Board" Width="200"></Button>
+            </StackPanel>
+        </Grid>       
     </Grid>
 </Window>
