@@ -43,11 +43,11 @@
   <wsdl:message name="IUser_CheckWord_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckWordResponse" />
   </wsdl:message>
-  <wsdl:message name="IUser_GetWord_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetWord" />
+  <wsdl:message name="IUser_GetWordHint_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordHint" />
   </wsdl:message>
-  <wsdl:message name="IUser_GetWord_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetWordResponse" />
+  <wsdl:message name="IUser_GetWordHint_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordHintResponse" />
   </wsdl:message>
   <wsdl:message name="IUser_SendLine_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:SendLine" />
@@ -74,9 +74,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUser/CheckWord" message="tns:IUser_CheckWord_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUser/CheckWordResponse" message="tns:IUser_CheckWord_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetWord">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUser/GetWord" message="tns:IUser_GetWord_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUser/GetWordResponse" message="tns:IUser_GetWord_OutputMessage" />
+    <wsdl:operation name="GetWordHint">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUser/GetWordHint" message="tns:IUser_GetWordHint_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUser/GetWordHintResponse" message="tns:IUser_GetWordHint_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendLine">
       <wsdl:output wsaw:Action="http://tempuri.org/IUser/SendLine" message="tns:IUser_SendLine_OutputCallbackMessage" />
@@ -127,8 +127,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetWord">
-      <soap12:operation soapAction="http://tempuri.org/IUser/GetWord" style="document" />
+    <wsdl:operation name="GetWordHint">
+      <soap12:operation soapAction="http://tempuri.org/IUser/GetWordHint" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

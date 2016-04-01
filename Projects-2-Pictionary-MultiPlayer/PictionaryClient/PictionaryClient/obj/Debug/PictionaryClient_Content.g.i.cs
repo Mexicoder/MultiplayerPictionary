@@ -8,16 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/eraser2.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markerblack.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markerblue.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markerbrown.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markergreen.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markergrey.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markerorange.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markerpurple.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markerred.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/markeryellow.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("img/whiteboard.png")]
 
 

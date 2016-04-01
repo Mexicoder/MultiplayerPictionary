@@ -35,7 +35,7 @@ namespace PictionaryLibrary
         [OperationContract]
         bool CheckWord(string word, string userName);
         [OperationContract]
-        string GetWord();
+        string GetWordHint();
     }
 
     /*--------------------------------- Service Implementation -------------------------------*/
@@ -111,9 +111,9 @@ namespace PictionaryLibrary
                 cb.SendLine(_drawLine);
         }
 
-        public string GetWord()
+        public string GetWordHint()
         {
-            return _drawWord.word_;
+            return _drawWord.wordHintFirstLetter_;
         }
 
         public bool CheckWord(string word, string userName)

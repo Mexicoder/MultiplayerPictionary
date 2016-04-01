@@ -60,7 +60,7 @@ namespace PictionaryClient
                 _userName = "Player:" + ran.Next(0, 1000);
                 if (_cnvsBrd.Join(_userName))
                 {
-                    WordProperty = _cnvsBrd.GetWord();  
+                    WordProperty = _cnvsBrd.GetWordHint();  
 
 
                     // TODO: currently we have it so that new players cant join mid game
@@ -256,6 +256,13 @@ namespace PictionaryClient
             }
             else
                 this.Dispatcher.BeginInvoke(new GameUpdateDelegate(FinishCurrentGame), new object[] { status });
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            //_cnvsBrd.CheckWord(GuessTB.Text);
+
         }
     }
 }

@@ -45,11 +45,11 @@ namespace PictionaryClient.PictionaryServiceRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/CheckWord", ReplyAction="http://tempuri.org/IUser/CheckWordResponse")]
         System.Threading.Tasks.Task<bool> CheckWordAsync(string word, string userName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWord", ReplyAction="http://tempuri.org/IUser/GetWordResponse")]
-        string GetWord();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWordHint", ReplyAction="http://tempuri.org/IUser/GetWordHintResponse")]
+        string GetWordHint();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWord", ReplyAction="http://tempuri.org/IUser/GetWordResponse")]
-        System.Threading.Tasks.Task<string> GetWordAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWordHint", ReplyAction="http://tempuri.org/IUser/GetWordHintResponse")]
+        System.Threading.Tasks.Task<string> GetWordHintAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -130,12 +130,12 @@ namespace PictionaryClient.PictionaryServiceRef {
             return base.Channel.CheckWordAsync(word, userName);
         }
         
-        public string GetWord() {
-            return base.Channel.GetWord();
+        public string GetWordHint() {
+            return base.Channel.GetWordHint();
         }
         
-        public System.Threading.Tasks.Task<string> GetWordAsync() {
-            return base.Channel.GetWordAsync();
+        public System.Threading.Tasks.Task<string> GetWordHintAsync() {
+            return base.Channel.GetWordHintAsync();
         }
     }
 }
