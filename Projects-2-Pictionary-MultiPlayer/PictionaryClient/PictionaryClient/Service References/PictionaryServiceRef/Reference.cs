@@ -39,11 +39,11 @@ namespace PictionaryClient.PictionaryServiceRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetLine", ReplyAction="http://tempuri.org/IUser/GetLineResponse")]
         System.Threading.Tasks.Task<string> GetLineAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/CheckWord", ReplyAction="http://tempuri.org/IUser/CheckWordResponse")]
-        bool CheckWord(string word, string userName);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/CheckWord")]
+        void CheckWord(string word, string userName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/CheckWord", ReplyAction="http://tempuri.org/IUser/CheckWordResponse")]
-        System.Threading.Tasks.Task<bool> CheckWordAsync(string word, string userName);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/CheckWord")]
+        System.Threading.Tasks.Task CheckWordAsync(string word, string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWordHint", ReplyAction="http://tempuri.org/IUser/GetWordHintResponse")]
         string GetWordHint();
@@ -122,11 +122,11 @@ namespace PictionaryClient.PictionaryServiceRef {
             return base.Channel.GetLineAsync();
         }
         
-        public bool CheckWord(string word, string userName) {
-            return base.Channel.CheckWord(word, userName);
+        public void CheckWord(string word, string userName) {
+            base.Channel.CheckWord(word, userName);
         }
         
-        public System.Threading.Tasks.Task<bool> CheckWordAsync(string word, string userName) {
+        public System.Threading.Tasks.Task CheckWordAsync(string word, string userName) {
             return base.Channel.CheckWordAsync(word, userName);
         }
         

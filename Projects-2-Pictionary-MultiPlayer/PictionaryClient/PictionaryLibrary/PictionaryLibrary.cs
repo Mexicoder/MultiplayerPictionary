@@ -32,10 +32,13 @@ namespace PictionaryLibrary
         void PostLine(string jsonLine);
         [OperationContract]
         string GetLine();
-        [OperationContract]
-        bool CheckWord(string word, string userName);
+        [OperationContract(IsOneWay = true)]
+        void CheckWord(string word, string userName);
         [OperationContract]
         string GetWordHint();
+
+        [OperationContract]
+        bool isDrawer(string userName);
     }
 
     /*--------------------------------- Service Implementation -------------------------------*/
@@ -44,6 +47,7 @@ namespace PictionaryLibrary
     public class DrawCanvasBoard : IUser
     {
         private Dictionary<string, IUserCallback> _userCallbacks = new Dictionary<string, IUserCallback>();
+        private string _drawerUser = "";
         private string _drawLine;
         private DrawWord _drawWord = null;
 
@@ -62,7 +66,6 @@ namespace PictionaryLibrary
 
                 // Retrieve client's callback proxy
                 IUserCallback cb = OperationContext.Current.GetCallbackChannel<IUserCallback>();
-
                 // Save alias and callback proxy    
                 _userCallbacks.Add(name.ToUpper(), cb);
                 //drawLine = new string();
@@ -71,6 +74,11 @@ namespace PictionaryLibrary
                     _drawWord = DrawWord.GenerateDrawWord();
                 }
 
+                // the first player to join will become the drawer for first game
+                if (_userCallbacks.Count == 1)
+                {
+                    _drawerUser = name.ToUpper();
+                }
                 return true;
             }
         }
@@ -116,16 +124,13 @@ namespace PictionaryLibrary
             return _drawWord.wordHintFirstLetter_;
         }
 
-        public bool CheckWord(string word, string userName)
+        public void CheckWord(string word, string userName)
         {
-            if (word == _drawWord.word_)
+            if (string.Equals(word ,_drawWord.word_, StringComparison.OrdinalIgnoreCase))
             {
-
                 updateAllUsersGameStatus(userName);
-                return true;
+                _drawerUser = userName;
             }
-            else
-                return false;
         }
 
         private void updateAllUsersGameStatus(string userWinner)
@@ -134,12 +139,24 @@ namespace PictionaryLibrary
 
             foreach (var user in _userCallbacks)
             {
-                if (user.Key == userWinner)
+                if (string.Equals(user.Key ,userWinner, StringComparison.OrdinalIgnoreCase))
                 {
                     user.Value.FinishCurrentGame(true);
                     continue;
                 }
                 user.Value.FinishCurrentGame();
+            }
+        }
+
+        public bool isDrawer(string userName)
+        {
+            if (_drawerUser == userName)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

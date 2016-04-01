@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Threading;
 
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Web.Script.Serialization;
 using PictionaryClient.PictionaryServiceRef;
 
@@ -52,10 +53,9 @@ namespace PictionaryClient
             try
             {
                 // Configure the ABCs of using the MessageBoard service
-                _cnvsBrd = new UserClient(new InstanceContext(this));
+                _cnvsBrd = new UserClient(new InstanceContext(this),"User", "http://localhost:12000/PictionaryLibrary/User");
                 
                 // TODO: get better user asking code for getting username and remove this crowd thing
-
                 Random ran = new Random();
                 _userName = "Player:" + ran.Next(0, 1000);
                 if (_cnvsBrd.Join(_userName))
@@ -239,15 +239,15 @@ namespace PictionaryClient
 
 
 
-        public delegate void GameUpdateDelegate(bool status = false);
+        public delegate void GameUpdateDelegate(bool status);
 
-        public void FinishCurrentGame(bool status = false)
+        public void FinishCurrentGame(bool status)
         {
             if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
             {
                 try
                 {
-
+                    MessageBox.Show(status ? "Winner: "+ _userName : "Loser: " + _userName);
                 }
                 catch (Exception ex)
                 {
@@ -260,9 +260,7 @@ namespace PictionaryClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            //_cnvsBrd.CheckWord(GuessTB.Text);
-
+            _cnvsBrd.CheckWord(GuessTB.Text, _userName);
         }
     }
 }
