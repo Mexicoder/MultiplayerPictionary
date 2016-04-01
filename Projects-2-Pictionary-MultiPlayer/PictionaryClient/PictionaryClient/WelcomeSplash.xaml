@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PictionaryClient"
         mc:Ignorable="d"
+        Icon="img\Icon.png"
         Title="WelcomeSplash" Height="150" Width="350" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
