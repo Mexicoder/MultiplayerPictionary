@@ -1,0 +1,25 @@
+﻿<Window x:Class="PictionaryClient.WelcomeSplash"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PictionaryClient"
+        mc:Ignorable="d"
+        Title="WelcomeSplash" Height="150" Width="350" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <TextBlock Text="UserName:"></TextBlock>
+            <TextBox x:Name="UserNameTb" Width="200" Margin="10,0,0,0"></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <TextBlock Text="Host IP Address:"></TextBlock>
+            <TextBox x:Name="HostIpTb" Width="172" Margin="10,0,0,0"></TextBox>
+        </StackPanel>
+        <Button x:Name="JoinGame" Grid.Row="2"  Content="Join Game" Width="100" Margin="20" Click="JoinGame_Click"></Button>
+    </Grid>
+</Window>
