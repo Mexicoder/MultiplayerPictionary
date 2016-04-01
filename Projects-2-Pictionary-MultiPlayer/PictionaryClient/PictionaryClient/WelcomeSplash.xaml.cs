@@ -44,7 +44,7 @@ namespace PictionaryClient
             {
                 var match = Regex.Match(HostIpTb.Text, regex, RegexOptions.IgnoreCase);
 
-                if (!match.Success)
+                if (!match.Success && HostIpTb.Text != "localhost")
                 {
                     MessageBox.Show("Host IP Address field is incorrect format", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -52,7 +52,7 @@ namespace PictionaryClient
                 {
                     //populate to app's variables
                     App.Current._userName = UserNameTb.Text;
-                    App.Current._ipAddress = HostIpTb.Text;
+                    App.Current._ipAddress = $"http://{HostIpTb.Text}:12000/PictionaryLibrary/User";
 
                     App.Current.mainWindow = new MainWindow(); //create a game window                 
                     App.Current.mainWindow.Show();

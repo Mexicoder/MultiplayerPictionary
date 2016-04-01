@@ -136,7 +136,6 @@
     <Resource Include="img\MarkerPurple.png" />
     <Resource Include="img\MarkerRed.png" />
     <Resource Include="img\MarkerYellow.png" />
-    <Resource Include="img\WhiteBoardBackup.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\PictionaryServiceRef\" />
@@ -158,6 +157,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\WhiteBoard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\drawer.png" />
+    <Resource Include="img\Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
