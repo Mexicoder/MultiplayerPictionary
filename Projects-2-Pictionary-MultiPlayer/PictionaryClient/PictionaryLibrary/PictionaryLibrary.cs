@@ -38,7 +38,7 @@ namespace PictionaryLibrary
         string GetWordHint();
 
         [OperationContract]
-        bool isDrawer(string userName);
+        string getDrawer(string userName);
     }
 
     /*--------------------------------- Service Implementation -------------------------------*/
@@ -55,7 +55,7 @@ namespace PictionaryLibrary
 
         public bool Join(string name)
         {
-            if (_userCallbacks.ContainsKey(name.ToUpper()))
+            if (_userCallbacks.ContainsKey(name))
             {
                 // User alias must be unique
                 return false;
@@ -67,7 +67,7 @@ namespace PictionaryLibrary
                 // Retrieve client's callback proxy
                 IUserCallback cb = OperationContext.Current.GetCallbackChannel<IUserCallback>();
                 // Save alias and callback proxy    
-                _userCallbacks.Add(name.ToUpper(), cb);
+                _userCallbacks.Add(name, cb);
                 //drawLine = new string();
                 if (_drawWord == null)
                 {
@@ -77,7 +77,7 @@ namespace PictionaryLibrary
                 // the first player to join will become the drawer for first game
                 if (_userCallbacks.Count == 1)
                 {
-                    _drawerUser = name.ToUpper();
+                    _drawerUser = name;
                 }
                 return true;
             }
@@ -85,9 +85,9 @@ namespace PictionaryLibrary
 
         public void Leave(string name)
         {
-            if (_userCallbacks.ContainsKey(name.ToUpper()))
+            if (_userCallbacks.ContainsKey(name))
             {
-                _userCallbacks.Remove(name.ToUpper());
+                _userCallbacks.Remove(name);
                 Console.WriteLine("User leave");
 
                 //drawLine = new string();
@@ -148,15 +148,15 @@ namespace PictionaryLibrary
             }
         }
 
-        public bool isDrawer(string userName)
+        public string getDrawer(string userName)
         {
             if (_drawerUser == userName)
             {
-                return true;
+                return _drawerUser;
             }
             else
             {
-                return false;
+                return _drawerUser;
             }
         }
     }

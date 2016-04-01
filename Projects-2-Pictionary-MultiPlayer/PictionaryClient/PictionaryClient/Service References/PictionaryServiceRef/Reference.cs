@@ -50,6 +50,12 @@ namespace PictionaryClient.PictionaryServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWordHint", ReplyAction="http://tempuri.org/IUser/GetWordHintResponse")]
         System.Threading.Tasks.Task<string> GetWordHintAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getDrawer", ReplyAction="http://tempuri.org/IUser/getDrawerResponse")]
+        string getDrawer(string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getDrawer", ReplyAction="http://tempuri.org/IUser/getDrawerResponse")]
+        System.Threading.Tasks.Task<string> getDrawerAsync(string userName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -136,6 +142,14 @@ namespace PictionaryClient.PictionaryServiceRef {
         
         public System.Threading.Tasks.Task<string> GetWordHintAsync() {
             return base.Channel.GetWordHintAsync();
+        }
+        
+        public string getDrawer(string userName) {
+            return base.Channel.getDrawer(userName);
+        }
+        
+        public System.Threading.Tasks.Task<string> getDrawerAsync(string userName) {
+            return base.Channel.getDrawerAsync(userName);
         }
     }
 }
