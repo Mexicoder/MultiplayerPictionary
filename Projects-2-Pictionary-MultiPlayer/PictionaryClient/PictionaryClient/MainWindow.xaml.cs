@@ -30,7 +30,7 @@ namespace PictionaryClient
     {
         Point _drawPoint = new Point();
         private UserClient _cnvsBrd = null;
-        private string _userName;
+      
 
         public MainWindow()
         {
@@ -43,6 +43,7 @@ namespace PictionaryClient
         {
             //MyHintProperty = dw.wordHintFirstLetter_;  //set the hintProperty
             this.DataContext = this;
+            RoleSplashTb.Text += "UserName: " + App.Current._userName;
         }
 
       
@@ -52,16 +53,11 @@ namespace PictionaryClient
             try
             {
                 // Configure the ABCs of using the MessageBoard service
-                _cnvsBrd = new UserClient(new InstanceContext(this));
-                
-                // TODO: get better user asking code for getting username and remove this crowd thing
-
-                Random ran = new Random();
-                _userName = "Player:" + ran.Next(0, 1000);
-                if (_cnvsBrd.Join(_userName))
+                _cnvsBrd = new UserClient(new InstanceContext(this));                
+                                             
+                if (_cnvsBrd.Join(App.Current._userName))
                 {
                     WordProperty = _cnvsBrd.GetWordHint();  
-
 
                     // TODO: currently we have it so that new players cant join mid game
                     whiteBoard.Children.Clear();
@@ -233,7 +229,7 @@ namespace PictionaryClient
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            _cnvsBrd?.Leave(_userName);
+            _cnvsBrd?.Leave(App.Current._userName);
             base.OnClosing(e);
         }
 
@@ -263,6 +259,20 @@ namespace PictionaryClient
 
             //_cnvsBrd.CheckWord(GuessTB.Text);
 
+        }
+
+        //TODO  make this clear all windows not just the current one
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            whiteBoard.Children.Clear(); 
+        }
+
+        /// <summary>
+        /// Window closing event handler to ensure all windows close properly
+        /// </summary>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App.Current.CloseAllWindows(e);
         }
     }
 }

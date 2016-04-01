@@ -17,3 +17,11 @@ C:\College\$Winter - S5 - 2016\Components .Net\Projects\Projects-2-Pictionary-Mu
 C:\$$Tony.NET\Projects\Project 2\MultiplayerPictionary\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryService.exe.config
 C:\$$Tony.NET\Projects\Project 2\MultiplayerPictionary\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\obj\Debug\PictionaryService.exe
 C:\$$Tony.NET\Projects\Project 2\MultiplayerPictionary\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\obj\Debug\PictionaryService.pdb
+C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryService.exe.config
+C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\obj\Debug\PictionaryService.exe
+C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\obj\Debug\PictionaryService.pdb
+C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryService.exe
+C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryService.pdb
+C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryLibrary.dll
+C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\bin\Debug\PictionaryLibrary.pdb
+C:\$$Tony.NET\Projects\Project 2\Projects-2-Pictionary-MultiPlayer\PictionaryClient\PictionaryService\obj\Debug\PictionaryService.csprojResolveAssemblyReference.cache
