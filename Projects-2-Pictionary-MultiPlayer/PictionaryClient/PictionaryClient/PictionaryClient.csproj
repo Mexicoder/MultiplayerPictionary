@@ -74,7 +74,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DrawWord.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -130,7 +129,7 @@
     <Resource Include="img\MarkerPurple.png" />
     <Resource Include="img\MarkerRed.png" />
     <Resource Include="img\MarkerYellow.png" />
-    <Resource Include="img\WhiteBoard.png" />
+    <Resource Include="img\WhiteBoardBackup.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\PictionaryServiceRef\" />

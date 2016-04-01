@@ -23,7 +23,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Hint:" Margin="10" FontSize="16" FontWeight="Bold"/>
-                <TextBlock x:Name="hint" Text="{Binding MyHintProperty}" Margin="10, 10,50,10" FontSize="16" FontWeight="Bold"/>
+                <TextBlock x:Name="hint" Text="{Binding WordProperty}" Margin="10, 10,50,10" FontSize="16" FontWeight="Bold"/>
             </StackPanel>
         </Grid>
         

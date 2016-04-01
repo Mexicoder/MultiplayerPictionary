@@ -37,44 +37,32 @@ namespace PictionaryClient
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             connectToPictionaryGame();
-
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-
-            List<DrawWord> dwList = new List<DrawWord>();
-
-            //Generate words:
-            dwList.Add(new DrawWord("DARK", "ADJECTIVE", "_ _ _ _", "D _ _ _"));
-            dwList.Add(new DrawWord("LASER", "NOUN", "_ _ _ _ _", "L _ _ _ _"));
-            dwList.Add(new DrawWord("WOBBLE", "VERB", "_ _ _ _ _ _", "W _ _ _ _ _"));
-            dwList.Add(new DrawWord("SKI GOGGLES", "NOUN", "_ _ _  _ _ _ _ _ _ _", "S _ _  G _ _ _ _ _ _"));
-
-            Random r = new Random();
-            DrawWord dw = dwList[r.Next(0, dwList.Count)]; //pick a random DrawWord from the list
-            MyHintProperty = dw.wordHintFirstLetter_;  //set the hintProperty
-
-            
+            //MyHintProperty = dw.wordHintFirstLetter_;  //set the hintProperty
             this.DataContext = this;
         }
+
+      
 
         private void connectToPictionaryGame()
         {
             try
             {
                 // Configure the ABCs of using the MessageBoard service
-                //DuplexChannelFactory<IUser> channel = new DuplexChannelFactory<IUser>(this, "User");
-
-                // Activate a MessageBoard object
-                //msgBrd = channel.CreateChannel();
                 _cnvsBrd = new UserClient(new InstanceContext(this));
+                
                 // TODO: get better user asking code for getting username and remove this crowd thing
+
                 Random ran = new Random();
                 _userName = "Player:" + ran.Next(0, 1000);
                 if (_cnvsBrd.Join(_userName))
                 {
-                    
+                    WordProperty = _cnvsBrd.GetWord();  
+
+
                     // TODO: currently we have it so that new players cant join mid game
                     whiteBoard.Children.Clear();
 
@@ -146,15 +134,15 @@ namespace PictionaryClient
 
 
 
-        public string MyHintProperty
+        public string WordProperty
         {
-            get { return (string)GetValue(MyHintPropertyProperty); }
-            set { SetValue(MyHintPropertyProperty, value); }
+            get { return (string)GetValue(WordPropertyProperty); }
+            set { SetValue(WordPropertyProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyHintProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MyHintPropertyProperty =
-            DependencyProperty.Register("MyHintProperty", typeof(string), typeof(MainWindow), new PropertyMetadata(""));
+        public static readonly DependencyProperty WordPropertyProperty =
+            DependencyProperty.Register("WordProperty", typeof(string), typeof(MainWindow), new PropertyMetadata(""));
 
 
 
@@ -247,6 +235,27 @@ namespace PictionaryClient
         {
             _cnvsBrd?.Leave(_userName);
             base.OnClosing(e);
+        }
+
+
+
+        public delegate void GameUpdateDelegate(bool status = false);
+
+        public void FinishCurrentGame(bool status = false)
+        {
+            if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
+            {
+                try
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+                this.Dispatcher.BeginInvoke(new GameUpdateDelegate(FinishCurrentGame), new object[] { status });
         }
     }
 }

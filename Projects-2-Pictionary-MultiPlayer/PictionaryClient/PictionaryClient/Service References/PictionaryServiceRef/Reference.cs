@@ -38,6 +38,18 @@ namespace PictionaryClient.PictionaryServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetLine", ReplyAction="http://tempuri.org/IUser/GetLineResponse")]
         System.Threading.Tasks.Task<string> GetLineAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/CheckWord", ReplyAction="http://tempuri.org/IUser/CheckWordResponse")]
+        bool CheckWord(string word, string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/CheckWord", ReplyAction="http://tempuri.org/IUser/CheckWordResponse")]
+        System.Threading.Tasks.Task<bool> CheckWordAsync(string word, string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWord", ReplyAction="http://tempuri.org/IUser/GetWordResponse")]
+        string GetWord();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWord", ReplyAction="http://tempuri.org/IUser/GetWordResponse")]
+        System.Threading.Tasks.Task<string> GetWordAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -45,6 +57,9 @@ namespace PictionaryClient.PictionaryServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/SendLine")]
         void SendLine(string jsonLine);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/FinishCurrentGame")]
+        void FinishCurrentGame(bool status);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -105,6 +120,22 @@ namespace PictionaryClient.PictionaryServiceRef {
         
         public System.Threading.Tasks.Task<string> GetLineAsync() {
             return base.Channel.GetLineAsync();
+        }
+        
+        public bool CheckWord(string word, string userName) {
+            return base.Channel.CheckWord(word, userName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckWordAsync(string word, string userName) {
+            return base.Channel.CheckWordAsync(word, userName);
+        }
+        
+        public string GetWord() {
+            return base.Channel.GetWord();
+        }
+        
+        public System.Threading.Tasks.Task<string> GetWordAsync() {
+            return base.Channel.GetWordAsync();
         }
     }
 }
