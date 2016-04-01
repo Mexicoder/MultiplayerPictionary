@@ -40,14 +40,17 @@
   <wsdl:message name="IUser_CheckWord_InputMessage">
     <wsdl:part name="parameters" element="tns:CheckWord" />
   </wsdl:message>
-  <wsdl:message name="IUser_CheckWord_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CheckWordResponse" />
-  </wsdl:message>
   <wsdl:message name="IUser_GetWordHint_InputMessage">
     <wsdl:part name="parameters" element="tns:GetWordHint" />
   </wsdl:message>
   <wsdl:message name="IUser_GetWordHint_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetWordHintResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUser_getDrawer_InputMessage">
+    <wsdl:part name="parameters" element="tns:getDrawer" />
+  </wsdl:message>
+  <wsdl:message name="IUser_getDrawer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getDrawerResponse" />
   </wsdl:message>
   <wsdl:message name="IUser_SendLine_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:SendLine" />
@@ -72,11 +75,14 @@
     </wsdl:operation>
     <wsdl:operation name="CheckWord">
       <wsdl:input wsaw:Action="http://tempuri.org/IUser/CheckWord" message="tns:IUser_CheckWord_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUser/CheckWordResponse" message="tns:IUser_CheckWord_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetWordHint">
       <wsdl:input wsaw:Action="http://tempuri.org/IUser/GetWordHint" message="tns:IUser_GetWordHint_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUser/GetWordHintResponse" message="tns:IUser_GetWordHint_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDrawer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUser/getDrawer" message="tns:IUser_getDrawer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUser/getDrawerResponse" message="tns:IUser_getDrawer_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendLine">
       <wsdl:output wsaw:Action="http://tempuri.org/IUser/SendLine" message="tns:IUser_SendLine_OutputCallbackMessage" />
@@ -123,12 +129,18 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetWordHint">
+      <soap12:operation soapAction="http://tempuri.org/IUser/GetWordHint" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetWordHint">
-      <soap12:operation soapAction="http://tempuri.org/IUser/GetWordHint" style="document" />
+    <wsdl:operation name="getDrawer">
+      <soap12:operation soapAction="http://tempuri.org/IUser/getDrawer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

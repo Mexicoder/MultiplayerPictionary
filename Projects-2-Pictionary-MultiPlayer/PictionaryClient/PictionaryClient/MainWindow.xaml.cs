@@ -30,7 +30,7 @@ namespace PictionaryClient
     {
         Point _drawPoint = new Point();
         private UserClient _cnvsBrd = null;
-      
+
 
         public MainWindow()
         {
@@ -46,18 +46,27 @@ namespace PictionaryClient
             RoleSplashTb.Text += "UserName: " + App.Current._userName;
         }
 
-      
+
 
         private void connectToPictionaryGame()
         {
             try
             {
                 // Configure the ABCs of using the MessageBoard service
-                _cnvsBrd = new UserClient(new InstanceContext(this));                
-                                             
+                _cnvsBrd = new UserClient(new InstanceContext(this), "User", App.Current._ipAddress);
+
+
                 if (_cnvsBrd.Join(App.Current._userName))
                 {
-                    WordProperty = _cnvsBrd.GetWordHint();  
+                    var Drawer = _cnvsBrd.getDrawer(App.Current._userName);
+                    DrawerNameTb.Text = "Drawer: " + Drawer;
+                    if (Drawer == App.Current._userName)
+                    {
+                        GuessTB.IsEnabled = false;
+                        GuessB.IsEnabled = false;
+                    }
+
+                        WordProperty = _cnvsBrd.GetWordHint();
 
                     // TODO: currently we have it so that new players cant join mid game
                     whiteBoard.Children.Clear();
@@ -84,7 +93,7 @@ namespace PictionaryClient
 
         private void Canvas_MouseMove_1(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed && _cnvsBrd.getDrawer(App.Current._userName) == App.Current._userName)
             {
                 Line line = new Line();
 
@@ -244,6 +253,23 @@ namespace PictionaryClient
                 try
                 {
 
+                    if (status)
+                    {
+                        MessageBox.Show("Winner: " + App.Current._userName);
+
+                        var Drawer = _cnvsBrd.getDrawer(App.Current._userName);
+                        DrawerNameTb.Text = "Drawer: " + Drawer;
+                        if (Drawer == App.Current._userName)
+                        {
+                            GuessTB.IsEnabled = false;
+                            GuessB.IsEnabled = false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Loser: " + App.Current._userName);
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -256,15 +282,13 @@ namespace PictionaryClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            //_cnvsBrd.CheckWord(GuessTB.Text);
-
+            _cnvsBrd.CheckWord(GuessTB.Text, App.Current._userName);
         }
 
         //TODO  make this clear all windows not just the current one
         private void ClearBtn_Click(object sender, RoutedEventArgs e)
         {
-            whiteBoard.Children.Clear(); 
+            whiteBoard.Children.Clear();
         }
 
         /// <summary>

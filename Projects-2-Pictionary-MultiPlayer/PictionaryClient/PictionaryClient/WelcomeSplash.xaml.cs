@@ -42,7 +42,7 @@ namespace PictionaryClient
             {
                 //populate to app's variables
                 App.Current._userName = UserNameTb.Text;
-                App.Current._ipAddress = HostIpTb.Text;
+                App.Current._ipAddress = $"http://{HostIpTb.Text}:12000/PictionaryLibrary/User";
 
                 App.Current.mainWindow = new MainWindow(); //create a game window                 
                 App.Current.mainWindow.Show();

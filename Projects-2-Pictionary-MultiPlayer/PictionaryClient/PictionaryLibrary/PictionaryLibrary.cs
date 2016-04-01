@@ -32,10 +32,13 @@ namespace PictionaryLibrary
         void PostLine(string jsonLine);
         [OperationContract]
         string GetLine();
-        [OperationContract]
-        bool CheckWord(string word, string userName);
+        [OperationContract(IsOneWay = true)]
+        void CheckWord(string word, string userName);
         [OperationContract]
         string GetWordHint();
+
+        [OperationContract]
+        string getDrawer(string userName);
     }
 
     /*--------------------------------- Service Implementation -------------------------------*/
@@ -44,6 +47,7 @@ namespace PictionaryLibrary
     public class DrawCanvasBoard : IUser
     {
         private Dictionary<string, IUserCallback> _userCallbacks = new Dictionary<string, IUserCallback>();
+        private string _drawerUser = "";
         private string _drawLine;
         private DrawWord _drawWord = null;
 
@@ -51,7 +55,7 @@ namespace PictionaryLibrary
 
         public bool Join(string name)
         {
-            if (_userCallbacks.ContainsKey(name.ToUpper()))
+            if (_userCallbacks.ContainsKey(name))
             {
                 // User alias must be unique
                 return false;
@@ -62,24 +66,28 @@ namespace PictionaryLibrary
 
                 // Retrieve client's callback proxy
                 IUserCallback cb = OperationContext.Current.GetCallbackChannel<IUserCallback>();
-
                 // Save alias and callback proxy    
-                _userCallbacks.Add(name.ToUpper(), cb);
+                _userCallbacks.Add(name, cb);
                 //drawLine = new string();
                 if (_drawWord == null)
                 {
                     _drawWord = DrawWord.GenerateDrawWord();
                 }
 
+                // the first player to join will become the drawer for first game
+                if (_userCallbacks.Count == 1)
+                {
+                    _drawerUser = name;
+                }
                 return true;
             }
         }
 
         public void Leave(string name)
         {
-            if (_userCallbacks.ContainsKey(name.ToUpper()))
+            if (_userCallbacks.ContainsKey(name))
             {
-                _userCallbacks.Remove(name.ToUpper());
+                _userCallbacks.Remove(name);
                 Console.WriteLine("User leave");
 
                 //drawLine = new string();
@@ -116,16 +124,13 @@ namespace PictionaryLibrary
             return _drawWord.wordHintFirstLetter_;
         }
 
-        public bool CheckWord(string word, string userName)
+        public void CheckWord(string word, string userName)
         {
-            if (word == _drawWord.word_)
+            if (string.Equals(word ,_drawWord.word_, StringComparison.OrdinalIgnoreCase))
             {
-
                 updateAllUsersGameStatus(userName);
-                return true;
+                _drawerUser = userName;
             }
-            else
-                return false;
         }
 
         private void updateAllUsersGameStatus(string userWinner)
@@ -134,12 +139,24 @@ namespace PictionaryLibrary
 
             foreach (var user in _userCallbacks)
             {
-                if (user.Key == userWinner)
+                if (string.Equals(user.Key ,userWinner, StringComparison.OrdinalIgnoreCase))
                 {
                     user.Value.FinishCurrentGame(true);
                     continue;
                 }
                 user.Value.FinishCurrentGame();
+            }
+        }
+
+        public string getDrawer(string userName)
+        {
+            if (_drawerUser == userName)
+            {
+                return _drawerUser;
+            }
+            else
+            {
+                return _drawerUser;
             }
         }
     }

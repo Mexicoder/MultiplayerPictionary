@@ -39,17 +39,23 @@ namespace PictionaryClient.PictionaryServiceRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetLine", ReplyAction="http://tempuri.org/IUser/GetLineResponse")]
         System.Threading.Tasks.Task<string> GetLineAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/CheckWord", ReplyAction="http://tempuri.org/IUser/CheckWordResponse")]
-        bool CheckWord(string word, string userName);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/CheckWord")]
+        void CheckWord(string word, string userName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/CheckWord", ReplyAction="http://tempuri.org/IUser/CheckWordResponse")]
-        System.Threading.Tasks.Task<bool> CheckWordAsync(string word, string userName);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/CheckWord")]
+        System.Threading.Tasks.Task CheckWordAsync(string word, string userName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWordHint", ReplyAction="http://tempuri.org/IUser/GetWordHintResponse")]
         string GetWordHint();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWordHint", ReplyAction="http://tempuri.org/IUser/GetWordHintResponse")]
         System.Threading.Tasks.Task<string> GetWordHintAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getDrawer", ReplyAction="http://tempuri.org/IUser/getDrawerResponse")]
+        string getDrawer(string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getDrawer", ReplyAction="http://tempuri.org/IUser/getDrawerResponse")]
+        System.Threading.Tasks.Task<string> getDrawerAsync(string userName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -122,11 +128,11 @@ namespace PictionaryClient.PictionaryServiceRef {
             return base.Channel.GetLineAsync();
         }
         
-        public bool CheckWord(string word, string userName) {
-            return base.Channel.CheckWord(word, userName);
+        public void CheckWord(string word, string userName) {
+            base.Channel.CheckWord(word, userName);
         }
         
-        public System.Threading.Tasks.Task<bool> CheckWordAsync(string word, string userName) {
+        public System.Threading.Tasks.Task CheckWordAsync(string word, string userName) {
             return base.Channel.CheckWordAsync(word, userName);
         }
         
@@ -136,6 +142,14 @@ namespace PictionaryClient.PictionaryServiceRef {
         
         public System.Threading.Tasks.Task<string> GetWordHintAsync() {
             return base.Channel.GetWordHintAsync();
+        }
+        
+        public string getDrawer(string userName) {
+            return base.Channel.getDrawer(userName);
+        }
+        
+        public System.Threading.Tasks.Task<string> getDrawerAsync(string userName) {
+            return base.Channel.getDrawerAsync(userName);
         }
     }
 }
