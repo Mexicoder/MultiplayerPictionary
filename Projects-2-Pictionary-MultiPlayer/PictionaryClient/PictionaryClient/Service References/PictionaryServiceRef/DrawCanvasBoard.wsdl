@@ -37,8 +37,23 @@
   <wsdl:message name="IUser_GetLine_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLineResponse" />
   </wsdl:message>
+  <wsdl:message name="IUser_CheckWord_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckWord" />
+  </wsdl:message>
+  <wsdl:message name="IUser_CheckWord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckWordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUser_GetWord_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWord" />
+  </wsdl:message>
+  <wsdl:message name="IUser_GetWord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWordResponse" />
+  </wsdl:message>
   <wsdl:message name="IUser_SendLine_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:SendLine" />
+  </wsdl:message>
+  <wsdl:message name="IUser_FinishCurrentGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:FinishCurrentGame" />
   </wsdl:message>
   <wsdl:portType name="IUser">
     <wsdl:operation name="Join">
@@ -55,8 +70,19 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUser/GetLine" message="tns:IUser_GetLine_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUser/GetLineResponse" message="tns:IUser_GetLine_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CheckWord">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUser/CheckWord" message="tns:IUser_CheckWord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUser/CheckWordResponse" message="tns:IUser_CheckWord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWord">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUser/GetWord" message="tns:IUser_GetWord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUser/GetWordResponse" message="tns:IUser_GetWord_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SendLine">
       <wsdl:output wsaw:Action="http://tempuri.org/IUser/SendLine" message="tns:IUser_SendLine_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FinishCurrentGame">
+      <wsdl:output wsaw:Action="http://tempuri.org/IUser/FinishCurrentGame" message="tns:IUser_FinishCurrentGame_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="User" type="tns:IUser">
@@ -92,8 +118,32 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CheckWord">
+      <soap12:operation soapAction="http://tempuri.org/IUser/CheckWord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWord">
+      <soap12:operation soapAction="http://tempuri.org/IUser/GetWord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SendLine">
       <soap12:operation soapAction="http://tempuri.org/IUser/SendLine" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FinishCurrentGame">
+      <soap12:operation soapAction="http://tempuri.org/IUser/FinishCurrentGame" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

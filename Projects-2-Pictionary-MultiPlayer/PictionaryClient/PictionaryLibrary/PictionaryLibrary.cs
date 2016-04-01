@@ -15,6 +15,8 @@ namespace PictionaryLibrary
     {
         [OperationContract(IsOneWay = true)]
         void SendLine(string jsonLine);
+        [OperationContract(IsOneWay = true)]
+        void FinishCurrentGame(bool status = false);
     }
 
     /*----------------------------------- Service Contracts ----------------------------------*/
@@ -30,6 +32,10 @@ namespace PictionaryLibrary
         void PostLine(string jsonLine);
         [OperationContract]
         string GetLine();
+        [OperationContract]
+        bool CheckWord(string word, string userName);
+        [OperationContract]
+        string GetWord();
     }
 
     /*--------------------------------- Service Implementation -------------------------------*/
@@ -37,14 +43,15 @@ namespace PictionaryLibrary
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class DrawCanvasBoard : IUser
     {
-        private Dictionary<string, IUserCallback> userCallbacks = new Dictionary<string, IUserCallback>();
-        private string drawLine;
+        private Dictionary<string, IUserCallback> _userCallbacks = new Dictionary<string, IUserCallback>();
+        private string _drawLine;
+        private DrawWord _drawWord = null;
 
         /*----------------------------------- IUser methods ----------------------------------*/
 
         public bool Join(string name)
         {
-            if (userCallbacks.ContainsKey(name.ToUpper()))
+            if (_userCallbacks.ContainsKey(name.ToUpper()))
             {
                 // User alias must be unique
                 return false;
@@ -57,8 +64,12 @@ namespace PictionaryLibrary
                 IUserCallback cb = OperationContext.Current.GetCallbackChannel<IUserCallback>();
 
                 // Save alias and callback proxy    
-                userCallbacks.Add(name.ToUpper(), cb);
+                _userCallbacks.Add(name.ToUpper(), cb);
                 //drawLine = new string();
+                if (_drawWord == null)
+                {
+                    _drawWord = DrawWord.GenerateDrawWord();
+                }
 
                 return true;
             }
@@ -66,9 +77,9 @@ namespace PictionaryLibrary
 
         public void Leave(string name)
         {
-            if (userCallbacks.ContainsKey(name.ToUpper()))
+            if (_userCallbacks.ContainsKey(name.ToUpper()))
             {
-                userCallbacks.Remove(name.ToUpper());
+                _userCallbacks.Remove(name.ToUpper());
                 Console.WriteLine("User leave");
 
                 //drawLine = new string();
@@ -79,29 +90,57 @@ namespace PictionaryLibrary
         {
             Console.WriteLine("drawLine Post");
 
-            drawLine = jsonLine;
-            updateAllUsers();
+            _drawLine = jsonLine;
+            updateAllUsersCanvas();
         }
 
         // TODO: make this return all line later
         public string GetLine()
         {
-            return drawLine;
             Console.WriteLine("drawLine get");
+            return _drawLine;
 
         }
 
-        /*---------------------------------- Helper methods ----------------------------------*/
-
-        private void updateAllUsers()
+        private void updateAllUsersCanvas()
         {
             //TODO try getting rid of this 
-            string c = drawLine;
+            //string c = drawLine;
             Console.WriteLine("drawLine callback");
-            foreach (IUserCallback cb in userCallbacks.Values)
-                cb.SendLine(c);
+            foreach (IUserCallback cb in _userCallbacks.Values)
+                cb.SendLine(_drawLine);
         }
 
+        public string GetWord()
+        {
+            return _drawWord.word_;
+        }
 
+        public bool CheckWord(string word, string userName)
+        {
+            if (word == _drawWord.word_)
+            {
+
+                updateAllUsersGameStatus(userName);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private void updateAllUsersGameStatus(string userWinner)
+        {
+            Console.WriteLine("Game Status callback");
+
+            foreach (var user in _userCallbacks)
+            {
+                if (user.Key == userWinner)
+                {
+                    user.Value.FinishCurrentGame(true);
+                    continue;
+                }
+                user.Value.FinishCurrentGame();
+            }
+        }
     }
 }
