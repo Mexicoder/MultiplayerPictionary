@@ -74,7 +74,7 @@ namespace PictionaryClient
                         WordProperty = _cnvsBrd.GetWordHint();
 
                     // TODO: currently we have it so that new players cant join mid game
-                    whiteBoard.Children.Clear();
+                    whiteBoard.Children. = _cnvsBrd.getCanvas();
 
                 }
                 else

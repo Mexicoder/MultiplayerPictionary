@@ -52,10 +52,22 @@ namespace PictionaryClient.PictionaryServiceRef {
         System.Threading.Tasks.Task<string> GetWordHintAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getDrawer", ReplyAction="http://tempuri.org/IUser/getDrawerResponse")]
-        string getDrawer(string userName);
+        string getDrawer();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getDrawer", ReplyAction="http://tempuri.org/IUser/getDrawerResponse")]
-        System.Threading.Tasks.Task<string> getDrawerAsync(string userName);
+        System.Threading.Tasks.Task<string> getDrawerAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/isDrawer", ReplyAction="http://tempuri.org/IUser/isDrawerResponse")]
+        bool isDrawer(string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/isDrawer", ReplyAction="http://tempuri.org/IUser/isDrawerResponse")]
+        System.Threading.Tasks.Task<bool> isDrawerAsync(string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getCanvas", ReplyAction="http://tempuri.org/IUser/getCanvasResponse")]
+        string[] getCanvas();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getCanvas", ReplyAction="http://tempuri.org/IUser/getCanvasResponse")]
+        System.Threading.Tasks.Task<string[]> getCanvasAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -144,12 +156,28 @@ namespace PictionaryClient.PictionaryServiceRef {
             return base.Channel.GetWordHintAsync();
         }
         
-        public string getDrawer(string userName) {
-            return base.Channel.getDrawer(userName);
+        public string getDrawer() {
+            return base.Channel.getDrawer();
         }
         
-        public System.Threading.Tasks.Task<string> getDrawerAsync(string userName) {
-            return base.Channel.getDrawerAsync(userName);
+        public System.Threading.Tasks.Task<string> getDrawerAsync() {
+            return base.Channel.getDrawerAsync();
+        }
+        
+        public bool isDrawer(string userName) {
+            return base.Channel.isDrawer(userName);
+        }
+        
+        public System.Threading.Tasks.Task<bool> isDrawerAsync(string userName) {
+            return base.Channel.isDrawerAsync(userName);
+        }
+        
+        public string[] getCanvas() {
+            return base.Channel.getCanvas();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getCanvasAsync() {
+            return base.Channel.getCanvasAsync();
         }
     }
 }

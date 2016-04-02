@@ -52,7 +52,7 @@ namespace PictionaryLibrary
         private Dictionary<string, IUserCallback> _userCallbacks = new Dictionary<string, IUserCallback>();
         private string _drawerUser = "";
         private string _drawLine;
-        private string[] _drawCanvas = new string[] {};
+        private List<string> _drawCanvas = new List<string>();
         private DrawWord _drawWord = null;
 
         /*----------------------------------- IUser methods ----------------------------------*/
@@ -103,7 +103,7 @@ namespace PictionaryLibrary
             Console.WriteLine("drawLine Post");
 
             _drawLine = jsonLine;
-            _drawCanvas[_drawCanvas.Length] = jsonLine;
+            _drawCanvas.Add(jsonLine);
             updateAllUsersCanvas();
         }
 
@@ -171,7 +171,7 @@ namespace PictionaryLibrary
 
         public string[] getCanvas()
         {
-            return _drawCanvas;
+            return _drawCanvas.ToArray();
         }
     }
 }

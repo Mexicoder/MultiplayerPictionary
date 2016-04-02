@@ -22,9 +22,10 @@
     <MetadataSource Address="http://localhost:12000" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="6065efc0-128d-4b48-9eae-37d096991866" SourceId="1" SourceUrl="http://localhost:12000/?xsd=xsd1" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="0f443329-8f44-49ce-914b-04aa5b9ce905" SourceId="1" SourceUrl="http://localhost:12000/?xsd=xsd2" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="aeabf5f5-ce90-4d82-ace4-c61299b38ce4" SourceId="1" SourceUrl="http://localhost:12000/?disco" />
     <MetadataFile FileName="DrawCanvasBoard.wsdl" MetadataType="Wsdl" ID="209417af-3553-4b03-a3a0-8dda146ce9b0" SourceId="1" SourceUrl="http://localhost:12000/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="6065efc0-128d-4b48-9eae-37d096991866" SourceId="1" SourceUrl="http://localhost:12000/?xsd=xsd1" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="2fdbd9dc-fa97-4be7-a77b-999f47b50224" SourceId="1" SourceUrl="http://localhost:12000/?xsd=xsd0" />
   </Metadata>
   <Extensions>
