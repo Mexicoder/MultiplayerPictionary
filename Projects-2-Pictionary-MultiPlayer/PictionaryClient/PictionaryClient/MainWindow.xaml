@@ -19,7 +19,8 @@
             <TextBlock x:Name="RoleSplashTb" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal">
                 <Image Source="img/drawer.png" Width="40" VerticalAlignment="Top"/>
-                <TextBlock x:Name="DrawerNameTb" Text="Drawer:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="Drawerlbl" Text="Drawer:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="DrawerNameTb" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">

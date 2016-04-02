@@ -59,7 +59,7 @@ namespace PictionaryClient
                 if (_cnvsBrd.Join(App.Current._userName))
                 {
                     var Drawer = _cnvsBrd.getDrawer();
-                    DrawerNameTb.Text = "Drawer: " + Drawer;
+                    DrawerNameTb.Text = Drawer;
                     if (Drawer == App.Current._userName) //drawer settings
                     {
                         GuessPanel.Visibility = Visibility.Hidden;
@@ -258,16 +258,14 @@ namespace PictionaryClient
 
 
 
-        public delegate void GameUpdateDelegate(bool status = false);
+        public delegate void GameUpdateDelegate(string userWinner, bool status = false);
 
-        public void FinishCurrentGame(bool status = false)
+        public void FinishCurrentGame(string userWinner, bool status = false)
         {
             if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
             {
                 try
-                {
-                    var Drawer = _cnvsBrd.getDrawer(); 
-                    
+                {                   
                     if (status) //winner
                     {
                         MessageBox.Show("Congratulations " + App.Current._userName + ", you won!");
@@ -287,13 +285,24 @@ namespace PictionaryClient
                    //         DrawPanel.Visibility = Visibility.Hidden;
                    //     }
                     //    else {
-                    //    if ()
-
-                            MessageBox.Show("Sorry " + App.Current._userName + ", you lost.");
+                        if (App.Current._userName == DrawerNameTb.Text)
+                        {
+                            MessageBox.Show("Congrats " + App.Current._userName + "! " + userWinner + " guessed your drawing!");
                             GuessPanel.Visibility = Visibility.Visible;
                             DrawPanel.Visibility = Visibility.Hidden;
-                    //    }
+                        }
+                        else { 
+                            MessageBox.Show("Sorry " + App.Current._userName + ", you lost. " + userWinner + " won!");
+                            GuessPanel.Visibility = Visibility.Visible;
+                            DrawPanel.Visibility = Visibility.Hidden;
+                        }
                     }
+
+                    //setup for next game
+                    DrawerNameTb.Text = _cnvsBrd.getDrawer();
+                    whiteBoard.Children.Clear();
+
+
 
                 }
                 catch (Exception ex)
@@ -302,7 +311,7 @@ namespace PictionaryClient
                 }
             }
             else
-                this.Dispatcher.BeginInvoke(new GameUpdateDelegate(FinishCurrentGame), new object[] { status });
+                this.Dispatcher.BeginInvoke(new GameUpdateDelegate(FinishCurrentGame), new object[] { userWinner, status });
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
