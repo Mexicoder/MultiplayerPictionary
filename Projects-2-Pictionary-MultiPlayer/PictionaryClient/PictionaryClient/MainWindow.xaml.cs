@@ -73,8 +73,17 @@ namespace PictionaryClient
 
                         WordProperty = _cnvsBrd.GetWordHint();
 
-                    // TODO: currently we have it so that new players cant join mid game
-                    //whiteBoard.Children. = _cnvsBrd.getCanvas();
+                    var canvasLines = _cnvsBrd.getCanvas();
+
+                    if (canvasLines.Length > 0)
+                    {
+
+                        foreach (var line in canvasLines)
+                        {
+                            var customLine = new JavaScriptSerializer().Deserialize<JsonLine>(line);
+                            whiteBoard.Children.Add(JsonLine.LineDeserialize(customLine));
+                        }
+                    }
 
                 }
                 else
@@ -261,24 +270,29 @@ namespace PictionaryClient
                     
                     if (status) //winner
                     {
-                        MessageBox.Show("Congratulations you, " + App.Current._userName + " won!");
+                        MessageBox.Show("Congratulations " + App.Current._userName + ", you won!");
 
                        // DrawerNameTb.Text = "Drawer: " + Drawer; //winner is next drawer
-                        if (Drawer == App.Current._userName)
-                        {
+                        //if (Drawer == App.Current._userName)
+                        //{
                             GuessPanel.Visibility = Visibility.Hidden;
-                            DrawPanel.Visibility = Visibility.Visible;
-                        }
+                            DrawPanel.Visibility = Visibility.Visible; //if you won, you become the next drawer
+                        //}
                     }
                     else //for losers
                     {
-                        if (Drawer == App.Current._userName)
-                        {
-                            GuessPanel.Visibility = Visibility.Hidden;
-                            DrawPanel.Visibility = Visibility.Visible;
-                        }
-                        else
+                   //     if (Drawer == App.Current._userName) //if you just drew, you now become a guesser
+                   //     {
+                   //         GuessPanel.Visibility = Visibility.Visible;
+                   //         DrawPanel.Visibility = Visibility.Hidden;
+                   //     }
+                    //    else {
+                    //    if ()
+
                             MessageBox.Show("Sorry " + App.Current._userName + ", you lost.");
+                            GuessPanel.Visibility = Visibility.Visible;
+                            DrawPanel.Visibility = Visibility.Hidden;
+                    //    }
                     }
 
                 }
