@@ -61,6 +61,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetWord">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetWordResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getDrawer">
     <xs:complexType>
       <xs:sequence />
@@ -109,6 +121,7 @@
   <xs:element name="FinishCurrentGame">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="winnerUser" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="status" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
