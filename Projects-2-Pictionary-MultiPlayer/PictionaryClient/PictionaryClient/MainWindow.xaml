@@ -13,6 +13,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock x:Name="RoleSplashTb" FontSize="30" FontWeight="ExtraBold" HorizontalAlignment="Center"/>
@@ -22,10 +23,10 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+            <StackPanel x:Name="GuessPanel" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
                 <TextBlock Text="Guess Word:" FontSize="20" FontWeight="Bold" />
                 <TextBox x:Name="GuessTB" Width="200" FontSize="16" Margin="10,0,10,0"/>
-                <Button x:Name="GuessB"  Content="Submit" FontSize="16" FontWeight="Bold" Padding="10,0,10,0" Click="Button_Click" Height="28" VerticalAlignment="Top" ></Button>
+                <Button x:Name="GuessBtn"  Content="Submit" FontSize="16" FontWeight="Bold" Padding="10,0,10,0" Click="Button_Click" Height="28" VerticalAlignment="Top" ></Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Hint:" Margin="10" FontSize="16" FontWeight="Bold"/>
@@ -60,7 +61,10 @@
                     <Image x:Name="blackMarker" Source="img/MarkerBlack.png" Width="90" Margin="5,0,0,-20" MouseDown="blackMarker_MouseDown"/>
                 </StackPanel>
                 <Image Source="img/WhiteBoard.png"/>
-
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="4" >
+            <StackPanel x:Name="DrawPanel" Orientation="Vertical">
                 <StackPanel  Orientation="Vertical" HorizontalAlignment="Center">
                     <TextBlock Text="Marker Thickness" Canvas.Left="867" Canvas.Top="507" FontSize="14" FontWeight="Bold" Foreground="Gray"/>
                     <Slider x:Name="thicknessSlider" Minimum="1" Maximum="40" Width="100" Canvas.Left="877" Canvas.Top="487" Value="{Binding MyMarkerThicknessProperty, Mode=TwoWay}" />
@@ -68,5 +72,6 @@
                 <Button x:Name="ClearBtn" Content="Clear Board" Width="200" Click="ClearBtn_Click"></Button>
             </StackPanel>
         </Grid>
+
     </Grid>
 </Window>

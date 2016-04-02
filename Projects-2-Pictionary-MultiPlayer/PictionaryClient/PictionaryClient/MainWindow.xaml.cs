@@ -60,10 +60,15 @@ namespace PictionaryClient
                 {
                     var Drawer = _cnvsBrd.getDrawer(App.Current._userName);
                     DrawerNameTb.Text = "Drawer: " + Drawer;
-                    if (Drawer == App.Current._userName)
+                    if (Drawer == App.Current._userName) //drawer settings
                     {
-                        GuessTB.IsEnabled = false;
-                        GuessB.IsEnabled = false;
+                        GuessPanel.Visibility = Visibility.Hidden;
+                        DrawPanel.Visibility = Visibility.Visible;
+                    }
+                    else //guesser settings
+                    {
+                        GuessPanel.Visibility = Visibility.Visible;
+                        DrawPanel.Visibility = Visibility.Hidden;
                     }
 
                         WordProperty = _cnvsBrd.GetWordHint();
@@ -252,22 +257,28 @@ namespace PictionaryClient
             {
                 try
                 {
-
-                    if (status)
+                    var Drawer = _cnvsBrd.getDrawer(App.Current._userName); 
+                    
+                    if (status) //winner
                     {
-                        MessageBox.Show("Winner: " + App.Current._userName);
+                        MessageBox.Show("Congratulations you, " + App.Current._userName + " won!");
 
-                        var Drawer = _cnvsBrd.getDrawer(App.Current._userName);
-                        DrawerNameTb.Text = "Drawer: " + Drawer;
+                       // DrawerNameTb.Text = "Drawer: " + Drawer; //winner is next drawer
                         if (Drawer == App.Current._userName)
                         {
-                            GuessTB.IsEnabled = false;
-                            GuessB.IsEnabled = false;
+                            GuessPanel.Visibility = Visibility.Hidden;
+                            DrawPanel.Visibility = Visibility.Visible;
                         }
                     }
-                    else
+                    else //for losers
                     {
-                        MessageBox.Show("Loser: " + App.Current._userName);
+                        if (Drawer == App.Current._userName)
+                        {
+                            GuessPanel.Visibility = Visibility.Hidden;
+                            DrawPanel.Visibility = Visibility.Visible;
+                        }
+                        else
+                            MessageBox.Show("Loser: " + App.Current._userName);
                     }
 
                 }
