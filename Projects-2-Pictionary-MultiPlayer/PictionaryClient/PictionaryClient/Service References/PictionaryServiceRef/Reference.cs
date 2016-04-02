@@ -51,6 +51,12 @@ namespace PictionaryClient.PictionaryServiceRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWordHint", ReplyAction="http://tempuri.org/IUser/GetWordHintResponse")]
         System.Threading.Tasks.Task<string> GetWordHintAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWord", ReplyAction="http://tempuri.org/IUser/GetWordResponse")]
+        string GetWord();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/GetWord", ReplyAction="http://tempuri.org/IUser/GetWordResponse")]
+        System.Threading.Tasks.Task<string> GetWordAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUser/getDrawer", ReplyAction="http://tempuri.org/IUser/getDrawerResponse")]
         string getDrawer();
         
@@ -77,7 +83,7 @@ namespace PictionaryClient.PictionaryServiceRef {
         void SendLine(string jsonLine);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/FinishCurrentGame")]
-        void FinishCurrentGame(bool status);
+        void FinishCurrentGame(string winnerUser, bool status);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -154,6 +160,14 @@ namespace PictionaryClient.PictionaryServiceRef {
         
         public System.Threading.Tasks.Task<string> GetWordHintAsync() {
             return base.Channel.GetWordHintAsync();
+        }
+        
+        public string GetWord() {
+            return base.Channel.GetWord();
+        }
+        
+        public System.Threading.Tasks.Task<string> GetWordAsync() {
+            return base.Channel.GetWordAsync();
         }
         
         public string getDrawer() {

@@ -16,7 +16,7 @@ namespace PictionaryLibrary
         [OperationContract(IsOneWay = true)]
         void SendLine(string jsonLine);
         [OperationContract(IsOneWay = true)]
-        void FinishCurrentGame(bool status = false);
+        void FinishCurrentGame(string winnerUser, bool status = false);
     }
 
     /*----------------------------------- Service Contracts ----------------------------------*/
@@ -36,6 +36,8 @@ namespace PictionaryLibrary
         void CheckWord(string word, string userName);
         [OperationContract]
         string GetWordHint();
+        [OperationContract]
+        string GetWord();
         [OperationContract]
         string getDrawer();
         [OperationContract]
@@ -129,6 +131,11 @@ namespace PictionaryLibrary
             return _drawWord.wordHintFirstLetter_;
         }
 
+        public string GetWord()
+        {
+            return _drawWord.word_;
+        }
+
         public void CheckWord(string word, string userName)
         {
             if (string.Equals(word ,_drawWord.word_, StringComparison.OrdinalIgnoreCase))
@@ -146,10 +153,10 @@ namespace PictionaryLibrary
             {
                 if (string.Equals(user.Key ,userWinner, StringComparison.OrdinalIgnoreCase))
                 {
-                    user.Value.FinishCurrentGame(true);
+                    user.Value.FinishCurrentGame(userWinner,true);
                     continue;
                 }
-                user.Value.FinishCurrentGame();
+                user.Value.FinishCurrentGame(userWinner);
             }
         }
 
