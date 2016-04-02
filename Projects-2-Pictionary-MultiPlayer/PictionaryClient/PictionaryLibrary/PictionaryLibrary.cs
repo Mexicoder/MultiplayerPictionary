@@ -36,9 +36,12 @@ namespace PictionaryLibrary
         void CheckWord(string word, string userName);
         [OperationContract]
         string GetWordHint();
-
         [OperationContract]
-        string getDrawer(string userName);
+        string getDrawer();
+        [OperationContract]
+        bool isDrawer(string userName);
+        [OperationContract]
+        string[] getCanvas();
     }
 
     /*--------------------------------- Service Implementation -------------------------------*/
@@ -49,6 +52,7 @@ namespace PictionaryLibrary
         private Dictionary<string, IUserCallback> _userCallbacks = new Dictionary<string, IUserCallback>();
         private string _drawerUser = "";
         private string _drawLine;
+        private string[] _drawCanvas = new string[] {};
         private DrawWord _drawWord = null;
 
         /*----------------------------------- IUser methods ----------------------------------*/
@@ -99,6 +103,7 @@ namespace PictionaryLibrary
             Console.WriteLine("drawLine Post");
 
             _drawLine = jsonLine;
+            _drawCanvas[_drawCanvas.Length] = jsonLine;
             updateAllUsersCanvas();
         }
 
@@ -148,16 +153,25 @@ namespace PictionaryLibrary
             }
         }
 
-        public string getDrawer(string userName)
+        public string getDrawer()
+        {
+            return _drawerUser;
+        }
+        public bool isDrawer(string userName)
         {
             if (_drawerUser == userName)
             {
-                return _drawerUser;
+                return true;
             }
             else
             {
-                return _drawerUser;
+                return false;
             }
+        }
+
+        public string[] getCanvas()
+        {
+            return _drawCanvas;
         }
     }
 }
