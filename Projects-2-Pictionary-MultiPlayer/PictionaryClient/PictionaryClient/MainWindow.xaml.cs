@@ -278,7 +278,7 @@ namespace PictionaryClient
                             DrawPanel.Visibility = Visibility.Visible;
                         }
                         else
-                            MessageBox.Show("Loser: " + App.Current._userName);
+                            MessageBox.Show("Sorry " + App.Current._userName + ", you lost.");
                     }
 
                 }
