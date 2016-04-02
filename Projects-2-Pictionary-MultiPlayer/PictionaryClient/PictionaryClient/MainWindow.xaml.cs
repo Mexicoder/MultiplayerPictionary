@@ -58,7 +58,7 @@ namespace PictionaryClient
 
                 if (_cnvsBrd.Join(App.Current._userName))
                 {
-                    var Drawer = _cnvsBrd.getDrawer(App.Current._userName);
+                    var Drawer = _cnvsBrd.getDrawer();
                     DrawerNameTb.Text = "Drawer: " + Drawer;
                     if (Drawer == App.Current._userName) //drawer settings
                     {
@@ -74,7 +74,7 @@ namespace PictionaryClient
                         WordProperty = _cnvsBrd.GetWordHint();
 
                     // TODO: currently we have it so that new players cant join mid game
-                    whiteBoard.Children. = _cnvsBrd.getCanvas();
+                    //whiteBoard.Children. = _cnvsBrd.getCanvas();
 
                 }
                 else
@@ -98,7 +98,7 @@ namespace PictionaryClient
 
         private void Canvas_MouseMove_1(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && _cnvsBrd.getDrawer(App.Current._userName) == App.Current._userName)
+            if (e.LeftButton == MouseButtonState.Pressed && _cnvsBrd.isDrawer(App.Current._userName))
             {
                 Line line = new Line();
 
@@ -257,7 +257,7 @@ namespace PictionaryClient
             {
                 try
                 {
-                    var Drawer = _cnvsBrd.getDrawer(App.Current._userName); 
+                    var Drawer = _cnvsBrd.getDrawer(); 
                     
                     if (status) //winner
                     {
