@@ -32,8 +32,8 @@ namespace PictionaryLibrary
         void PostLine(string jsonLine);
         [OperationContract]
         string GetLine();
-        [OperationContract(IsOneWay = true)]
-        void CheckWord(string word, string userName);
+        [OperationContract]
+        bool CheckWord(string word, string userName);
         [OperationContract]
         string GetWordHint();
         [OperationContract]
@@ -136,13 +136,16 @@ namespace PictionaryLibrary
             return _drawWord.word_;
         }
 
-        public void CheckWord(string word, string userName)
+        public bool CheckWord(string word, string userName)
         {
             if (string.Equals(word ,_drawWord.word_, StringComparison.OrdinalIgnoreCase))
             {
+                _drawWord = DrawWord.GenerateDrawWord();
                 updateAllUsersGameStatus(userName);
                 _drawerUser = userName;
+                return true;
             }
+            return false;
         }
 
         private void updateAllUsersGameStatus(string userWinner)

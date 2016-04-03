@@ -60,18 +60,20 @@ namespace PictionaryClient
                 {
                     var Drawer = _cnvsBrd.getDrawer();
                     DrawerNameTb.Text = Drawer;
-                    if (Drawer == App.Current._userName) //drawer settings
+                    if (_cnvsBrd.isDrawer(App.Current._userName)) //drawer settings
                     {
+                        WordProperty = _cnvsBrd.GetWord();
                         GuessPanel.Visibility = Visibility.Hidden;
                         DrawPanel.Visibility = Visibility.Visible;
                     }
                     else //guesser settings
                     {
+                        WordProperty = _cnvsBrd.GetWordHint();
                         GuessPanel.Visibility = Visibility.Visible;
-                        DrawPanel.Visibility = Visibility.Hidden;
+                        DrawPanel.Visibility = Visibility.Hidden;                        
                     }
 
-                        WordProperty = _cnvsBrd.GetWordHint();
+                        
 
                     var canvasLines = _cnvsBrd.getCanvas();
 
@@ -268,23 +270,13 @@ namespace PictionaryClient
                 {                   
                     if (status) //winner
                     {
-                        MessageBox.Show("Congratulations " + App.Current._userName + ", you won!");
-
-                       // DrawerNameTb.Text = "Drawer: " + Drawer; //winner is next drawer
-                        //if (Drawer == App.Current._userName)
-                        //{
-                            GuessPanel.Visibility = Visibility.Hidden;
-                            DrawPanel.Visibility = Visibility.Visible; //if you won, you become the next drawer
-                        //}
+                        MessageBox.Show("Congratulations " + App.Current._userName + ", you won!");                       
+                        GuessPanel.Visibility = Visibility.Hidden;
+                        DrawPanel.Visibility = Visibility.Visible; //if you won, you become the next drawer   
+                        WordProperty = _cnvsBrd.GetWord();
                     }
                     else //for losers
-                    {
-                   //     if (Drawer == App.Current._userName) //if you just drew, you now become a guesser
-                   //     {
-                   //         GuessPanel.Visibility = Visibility.Visible;
-                   //         DrawPanel.Visibility = Visibility.Hidden;
-                   //     }
-                    //    else {
+                    {                  
                         if (App.Current._userName == DrawerNameTb.Text)
                         {
                             MessageBox.Show("Congrats " + App.Current._userName + "! " + userWinner + " guessed your drawing!");
@@ -296,12 +288,12 @@ namespace PictionaryClient
                             GuessPanel.Visibility = Visibility.Visible;
                             DrawPanel.Visibility = Visibility.Hidden;
                         }
+                     WordProperty = _cnvsBrd.GetWordHint();
                     }
 
                     //setup for next game
                     DrawerNameTb.Text = _cnvsBrd.getDrawer();
                     whiteBoard.Children.Clear();
-
 
 
                 }
@@ -316,14 +308,16 @@ namespace PictionaryClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _cnvsBrd.CheckWord(GuessTB.Text, App.Current._userName);
+            if(!_cnvsBrd.CheckWord(GuessTB.Text, App.Current._userName))
+                MessageBox.Show("Sorry. Guess again!");
+
         }
 
-        //TODO  make this clear all windows not just the current one
-        private void ClearBtn_Click(object sender, RoutedEventArgs e)
-        {
-            whiteBoard.Children.Clear();
-        }
+        ////TODO  make this clear all windows not just the current one
+        //private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    whiteBoard.Children.Clear();
+        //}
 
         /// <summary>
         /// Window closing event handler to ensure all windows close properly

@@ -70,7 +70,7 @@
                     <TextBlock Text="Marker Thickness" Canvas.Left="867" Canvas.Top="507" FontSize="14" FontWeight="Bold" Foreground="Gray"/>
                     <Slider x:Name="thicknessSlider" Minimum="1" Maximum="40" Width="100" Canvas.Left="877" Canvas.Top="487" Value="{Binding MyMarkerThicknessProperty, Mode=TwoWay}" />
                 </StackPanel>
-                <Button x:Name="ClearBtn" Content="Clear Board" Width="200" Click="ClearBtn_Click"></Button>
+              <!--  <Button x:Name="ClearBtn" Content="Clear Board" Width="200" Click="ClearBtn_Click"></Button> -->
             </StackPanel>
         </Grid>
 
