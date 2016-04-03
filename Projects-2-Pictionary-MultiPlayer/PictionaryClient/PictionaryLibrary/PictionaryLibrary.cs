@@ -68,13 +68,12 @@ namespace PictionaryLibrary
             }
             else
             {
-                Console.WriteLine("User join");
+                Console.WriteLine($"User Joined: {name}");
 
                 // Retrieve client's callback proxy
                 IUserCallback cb = OperationContext.Current.GetCallbackChannel<IUserCallback>();
                 // Save alias and callback proxy    
                 _userCallbacks.Add(name, cb);
-                //drawLine = new string();
                 if (_drawWord == null)
                 {
                     _drawWord = DrawWord.GenerateDrawWord();
@@ -94,16 +93,12 @@ namespace PictionaryLibrary
             if (_userCallbacks.ContainsKey(name))
             {
                 _userCallbacks.Remove(name);
-                Console.WriteLine("User leave");
-
-                //drawLine = new string();
+                Console.WriteLine($"User Left: {name}");
             }
         }
 
         public void PostLine(string jsonLine)
         {
-            Console.WriteLine("drawLine Post");
-
             _drawLine = jsonLine;
             _drawCanvas.Add(jsonLine);
             updateAllUsersCanvas();
@@ -112,16 +107,11 @@ namespace PictionaryLibrary
         // TODO: make this return all line later
         public string GetLine()
         {
-            Console.WriteLine("drawLine get");
             return _drawLine;
-
         }
 
         private void updateAllUsersCanvas()
         {
-            //TODO try getting rid of this 
-            //string c = drawLine;
-            Console.WriteLine("drawLine callback");
             foreach (IUserCallback cb in _userCallbacks.Values)
                 cb.SendLine(_drawLine);
         }
@@ -150,8 +140,6 @@ namespace PictionaryLibrary
 
         private void updateAllUsersGameStatus(string userWinner)
         {
-            Console.WriteLine("Game Status callback");
-
             foreach (var user in _userCallbacks)
             {
                 if (string.Equals(user.Key ,userWinner, StringComparison.OrdinalIgnoreCase))
