@@ -61,6 +61,13 @@ namespace PictionaryLibrary
 
         /*----------------------------------- IUser methods ----------------------------------*/
 
+        #region SeriveClientMethods
+
+        /// <summary>
+        /// allows a new client to join and adds then to _userCallbacks
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool Join(string name)
         {
             if (_userCallbacks.ContainsKey(name))
@@ -81,7 +88,7 @@ namespace PictionaryLibrary
                     _drawWord = DrawWord.GenerateDrawWord();
                 }
 
-                // the first player to join will become the drawer for first game
+                // the first player to join will become the Drawer for first game
                 if (_userCallbacks.Count == 1)
                 {
                     _drawerUser = name;
@@ -90,6 +97,10 @@ namespace PictionaryLibrary
             }
         }
 
+        /// <summary>
+        /// when a client disconnects then removed them from the _userCallbacks
+        /// </summary>
+        /// <param name="name"></param>
         public void Leave(string name)
         {
             if (_userCallbacks.ContainsKey(name))
@@ -107,64 +118,37 @@ namespace PictionaryLibrary
             }
         }
 
-        public void PostLine(string jsonLine)
-        {
-            _drawLine = jsonLine;
-            _drawCanvas.Add(jsonLine);
-            updateAllUsersCanvas();
-        }
-
-        // TODO: make this return all line later
-        public string GetLine()
-        {
-            return _drawLine;
-        }
-
-        private void updateAllUsersCanvas()
-        {
-            foreach (IUserCallback cb in _userCallbacks.Values)
-                cb.SendLine(_drawLine);
-        }
-
-        public string GetWordHint()
-        {
-            return _drawWord.wordHintFirstLetter_;
-        }
-
-        public string GetWord()
-        {
-            return _drawWord.word_;
-        }
-
-        public bool CheckWord(string word, string userName)
-        {
-            if (string.Equals(word ,_drawWord.word_, StringComparison.OrdinalIgnoreCase))
-            {
-                _drawWord = DrawWord.GenerateDrawWord();
-                updateAllUsersGameStatus(userName);
-                _drawerUser = userName;
-                return true;
-            }
-            return false;
-        }
-
+        /// <summary>
+        /// updates all clients accordingly after one of the guessers submits the correct answer 
+        /// </summary>
+        /// <param name="userWinner"></param>
         private void updateAllUsersGameStatus(string userWinner)
         {
             foreach (var user in _userCallbacks)
             {
-                if (string.Equals(user.Key ,userWinner, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(user.Key, userWinner, StringComparison.OrdinalIgnoreCase))
                 {
-                    user.Value.FinishCurrentGame(userWinner,true);
+                    user.Value.FinishCurrentGame(userWinner, true);
                     continue;
                 }
                 user.Value.FinishCurrentGame(userWinner);
             }
         }
 
+        /// <summary>
+        /// get a string containing the drawers userName
+        /// </summary>
+        /// <returns></returns>
         public string getDrawer()
         {
             return _drawerUser;
         }
+       
+        /// <summary>
+        /// check to see if userName matches the drawers user name
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public bool isDrawer(string userName)
         {
             if (_drawerUser == userName)
@@ -177,9 +161,93 @@ namespace PictionaryLibrary
             }
         }
 
+        #endregion
+
+        #region ClientUpdateMethods
+
+        /// <summary>
+        /// update all guesser client canvases with the last line
+        /// </summary>
+        /// <param name="jsonLine"></param>
+        public void PostLine(string jsonLine)
+        {
+            _drawLine = jsonLine;
+            _drawCanvas.Add(jsonLine);
+            updateAllUsersCanvas();
+        }
+
+        /// <summary>
+        /// get all the lines that make up the image in the drawers client canvas
+        /// </summary>
+        /// <returns>string[]</returns>
         public string[] getCanvas()
         {
             return _drawCanvas.ToArray();
         }
+
+        /// <summary>
+        /// get last line that was drawn by Drawer
+        /// </summary>
+        /// <returns></returns>
+        public string GetLine()
+        {
+            return _drawLine;
+        }
+
+        /// <summary>
+        /// calls SendLine Callback
+        /// updated all guesser clients with the line that was just drawn by Drawer
+        /// </summary>
+        private void updateAllUsersCanvas()
+        {
+            foreach (var user in _userCallbacks.Where(x => !String.Equals(x.Key, _drawerUser, StringComparison.CurrentCultureIgnoreCase)))
+            {
+                user.Value.SendLine(_drawLine);
+            }
+        }
+
+        #endregion
+
+        #region DrawWordMethods
+
+        /// <summary>
+        /// gets the draw word hint for the cleitns guessing
+        /// </summary>
+        /// <returns></returns>
+        public string GetWordHint()
+        {
+            return _drawWord.wordHintFirstLetter_;
+        }
+
+        /// <summary>
+        /// gets the draw word and returns it
+        /// </summary>
+        /// <returns></returns>
+        public string GetWord()
+        {
+            return _drawWord.word_;
+        }
+
+        /// <summary>
+        /// word that is passed gets check if it matches the Draw Word
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public bool CheckWord(string word, string userName)
+        {
+            if (string.Equals(word ,_drawWord.word_, StringComparison.OrdinalIgnoreCase))
+            {
+                _drawWord = DrawWord.GenerateDrawWord();
+                updateAllUsersGameStatus(userName);
+                _drawerUser = userName;
+                return true;
+            }
+            return false;
+        }
+
+        #endregion
+
+
     }
 }

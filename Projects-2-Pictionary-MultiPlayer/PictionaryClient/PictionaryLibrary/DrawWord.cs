@@ -13,7 +13,7 @@ namespace PictionaryLibrary
         public string wordHintUnderscores_ { get; set; }
         public string wordHintFirstLetter_ { get; set; }
 
-        public DrawWord(string word, string wordType, string wordHintUnderscores, string wordHintFirstLetter)
+        private DrawWord(string word, string wordType, string wordHintUnderscores, string wordHintFirstLetter)
         {
             this.word_ = word;
             this.wordType_ = wordType;
@@ -21,6 +21,11 @@ namespace PictionaryLibrary
             this.wordHintFirstLetter_ = wordHintFirstLetter;
         }
 
+        /// <summary>
+        /// randomly choose new word for next game
+        /// </summary>
+        /// <param name="dwList"></param>
+        /// <returns></returns>
         public static DrawWord ChooseDrawWord(List<DrawWord> dwList)
         {
             Random r = new Random();
@@ -28,6 +33,10 @@ namespace PictionaryLibrary
             return dw;
         }
 
+        /// <summary>
+        /// populated the list of draw word to choose from
+        /// </summary>
+        /// <returns></returns>
         public static List<DrawWord> PopulateDrawWordList()
         {
             List<DrawWord> dwList = new List<DrawWord>();
@@ -48,8 +57,13 @@ namespace PictionaryLibrary
             return dwList;
         }
 
+        /// <summary>
+        /// returns new draw word
+        /// </summary>
+        /// <returns></returns>
         public static DrawWord GenerateDrawWord()
         {
+
             var dwList = DrawWord.PopulateDrawWordList();
             var drawWord = DrawWord.ChooseDrawWord(dwList);
             return drawWord;
