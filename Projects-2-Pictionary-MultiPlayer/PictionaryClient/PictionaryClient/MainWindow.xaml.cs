@@ -30,6 +30,7 @@ namespace PictionaryClient
     {
         Point _drawPoint = new Point();
         private UserClient _cnvsBrd = null;
+        private string _drawWord = "";
 
 
         public MainWindow()
@@ -58,11 +59,12 @@ namespace PictionaryClient
 
                 if (_cnvsBrd.Join(App.Current._userName))
                 {
+                    _drawWord = _cnvsBrd.GetWord();
                     var Drawer = _cnvsBrd.getDrawer();
                     DrawerNameTb.Text = Drawer;
                     if (_cnvsBrd.isDrawer(App.Current._userName)) //drawer settings
                     {
-                        WordProperty = _cnvsBrd.GetWord();
+                        WordProperty = _drawWord;
                         GuessPanel.Visibility = Visibility.Hidden;
                         DrawPanel.Visibility = Visibility.Visible;
                     }
@@ -72,8 +74,8 @@ namespace PictionaryClient
                         GuessPanel.Visibility = Visibility.Visible;
                         DrawPanel.Visibility = Visibility.Hidden;                        
                     }
+                    
 
-                        
 
                     var canvasLines = _cnvsBrd.getCanvas();
 
@@ -267,13 +269,13 @@ namespace PictionaryClient
             if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
             {
                 try
-                {                   
+                {                    
                     if (status) //winner
                     {
                         MessageBox.Show("Congratulations " + App.Current._userName + ", you won!");                       
                         GuessPanel.Visibility = Visibility.Hidden;
                         DrawPanel.Visibility = Visibility.Visible; //if you won, you become the next drawer   
-                        WordProperty = _cnvsBrd.GetWord();
+                        _drawWord = WordProperty = _cnvsBrd.GetWord();                         
                     }
                     else //for losers
                     {                  
@@ -284,11 +286,12 @@ namespace PictionaryClient
                             DrawPanel.Visibility = Visibility.Hidden;
                         }
                         else { 
-                            MessageBox.Show("Sorry " + App.Current._userName + ", you lost. " + userWinner + " won! The correct word was " + _cnvsBrd.GetWord());
+                            MessageBox.Show("Sorry " + App.Current._userName + ", you lost. " + userWinner + " won! The correct word was " + _drawWord);
                             GuessPanel.Visibility = Visibility.Visible;
                             DrawPanel.Visibility = Visibility.Hidden;
                         }
-                     WordProperty = _cnvsBrd.GetWordHint();
+                         WordProperty = _cnvsBrd.GetWordHint();
+                         _drawWord = _cnvsBrd.GetWord();
                     }
 
                     //setup for next game
