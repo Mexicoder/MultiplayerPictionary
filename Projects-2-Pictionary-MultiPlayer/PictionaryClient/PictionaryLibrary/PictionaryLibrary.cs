@@ -17,6 +17,8 @@ namespace PictionaryLibrary
         void SendLine(string jsonLine);
         [OperationContract(IsOneWay = true)]
         void FinishCurrentGame(string winnerUser, bool status = false);
+        [OperationContract(IsOneWay = true)]
+        void ResetClientsGame(string newDrawerName);
     }
 
     /*----------------------------------- Service Contracts ----------------------------------*/
@@ -92,8 +94,16 @@ namespace PictionaryLibrary
         {
             if (_userCallbacks.ContainsKey(name))
             {
-                _userCallbacks.Remove(name);
                 Console.WriteLine($"User Left: {name}");
+                if (name == _drawerUser)
+                {
+                    _drawerUser = _userCallbacks.Where(x => x.Key != name).FirstOrDefault().Key;
+                    foreach (var user in _userCallbacks)
+                    {
+                        user.Value.ResetClientsGame(_drawerUser);
+                    }
+                }
+                _userCallbacks.Remove(name);
             }
         }
 

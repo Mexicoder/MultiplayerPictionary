@@ -14,11 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
-
 using System.ServiceModel;
 using System.Web.Script.Serialization;
 using PictionaryClient.PictionaryServiceRef;
-
 
 namespace PictionaryClient
 {
@@ -31,7 +29,6 @@ namespace PictionaryClient
         Point _drawPoint = new Point();
         private UserClient _cnvsBrd = null;
         private string _drawWord = "";
-
 
         public MainWindow()
         {
@@ -47,15 +44,12 @@ namespace PictionaryClient
             RoleSplashTb.Text += "UserName: " + App.Current._userName;
         }
 
-
-
         private void connectToPictionaryGame()
         {
             try
             {
                 // Configure the ABCs of using the MessageBoard service
                 _cnvsBrd = new UserClient(new InstanceContext(this), "User", App.Current._ipAddress);
-
 
                 if (_cnvsBrd.Join(App.Current._userName))
                 {
@@ -75,8 +69,6 @@ namespace PictionaryClient
                         DrawPanel.Visibility = Visibility.Hidden;                        
                     }
                     
-
-
                     var canvasLines = _cnvsBrd.getCanvas();
 
                     if (canvasLines.Length > 0)
@@ -88,7 +80,6 @@ namespace PictionaryClient
                             whiteBoard.Children.Add(JsonLine.LineDeserialize(customLine));
                         }
                     }
-
                 }
                 else
                 {
@@ -134,11 +125,8 @@ namespace PictionaryClient
                 });
 
                 _cnvsBrd.PostLine(serializedLine);
-
                 _drawPoint = e.GetPosition(whiteBoard);
-
                 whiteBoard.Children.Add(line);
-
             }
         }
 
@@ -242,7 +230,6 @@ namespace PictionaryClient
                 try
                 {
                     var customLine = new JavaScriptSerializer().Deserialize<JsonLine>(jsonLine);
-
                     whiteBoard.Children.Add(JsonLine.LineDeserialize(customLine));
                 }
                 catch (Exception ex)
@@ -256,11 +243,9 @@ namespace PictionaryClient
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            _cnvsBrd?.Leave(App.Current._userName);
+            
             base.OnClosing(e);
         }
-
-
 
         public delegate void GameUpdateDelegate(string userWinner, bool status = false);
 
@@ -297,8 +282,6 @@ namespace PictionaryClient
                     //setup for next game
                     DrawerNameTb.Text = _cnvsBrd.getDrawer();
                     whiteBoard.Children.Clear();
-
-
                 }
                 catch (Exception ex)
                 {
@@ -309,6 +292,42 @@ namespace PictionaryClient
                 this.Dispatcher.BeginInvoke(new GameUpdateDelegate(FinishCurrentGame), new object[] { userWinner, status });
         }
 
+
+        public delegate void GameResetDelegate(string newDrawerName);
+
+        public void ResetClientsGame(string newDrawerName)
+        {
+            if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
+            {
+                try
+                {                  
+                    MessageBox.Show(DrawerNameTb.Text + " left the game. The new drawer is " + newDrawerName);
+                    DrawerNameTb.Text = newDrawerName; //set the new drawer to the textbox
+                    whiteBoard.Children.Clear();       //clear board      
+                    _drawWord = _cnvsBrd.GetWord();  //get a new word
+
+                    if (App.Current._userName == DrawerNameTb.Text)
+                    {
+                        WordProperty = _drawWord;
+                        GuessPanel.Visibility = Visibility.Hidden;
+                        DrawPanel.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        WordProperty = _cnvsBrd.GetWordHint();
+                        GuessPanel.Visibility = Visibility.Visible;
+                        DrawPanel.Visibility = Visibility.Hidden;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+                this.Dispatcher.BeginInvoke(new GameResetDelegate(ResetClientsGame), new object[] { newDrawerName });
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(!_cnvsBrd.CheckWord(GuessTB.Text, App.Current._userName))
@@ -317,18 +336,25 @@ namespace PictionaryClient
 
         }
 
-        ////TODO  make this clear all windows not just the current one
-        //private void ClearBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    whiteBoard.Children.Clear();
-        //}
-
         /// <summary>
         /// Window closing event handler to ensure all windows close properly
         /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            App.Current.CloseAllWindows(e);
+            if (App.Current.exiting == false) //so that message doesnt appear for each closing 
+            {
+                MessageBoxResult answer = MessageBox.Show("Are you sure you want to exit? ", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (answer == MessageBoxResult.Yes)
+                {
+                    _cnvsBrd?.Leave(App.Current._userName);
+                    App.Current.exiting = true;
+                    e.Cancel = false;
+                    App.Current.Shutdown();
+                }
+                else
+                    e.Cancel = true;
+            }
         }
     }
 }

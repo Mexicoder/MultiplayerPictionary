@@ -84,6 +84,9 @@ namespace PictionaryClient.PictionaryServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/FinishCurrentGame")]
         void FinishCurrentGame(string winnerUser, bool status);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUser/ResetClientsGame")]
+        void ResetClientsGame(string newDrawerName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

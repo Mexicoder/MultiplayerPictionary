@@ -24,9 +24,7 @@ namespace PictionaryClient
         {
             InitializeComponent();
         }
-
-
-
+        
         private void JoinGame_Click(object sender, RoutedEventArgs e)
         {
             var regex = @"^(([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)\.){3}([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)$";
@@ -35,10 +33,8 @@ namespace PictionaryClient
                 MessageBox.Show("Please fill out userName field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (HostIpTb.Text == "")
-            {
-                
-                MessageBox.Show("Please fill out Host IP Address field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                
+            {                
+                MessageBox.Show("Please fill out Host IP Address field", "Error", MessageBoxButton.OK, MessageBoxImage.Error);          
             }               
             else
             {
@@ -53,7 +49,6 @@ namespace PictionaryClient
                     //populate to app's variables
                     App.Current._userName = UserNameTb.Text;
                     App.Current._ipAddress = $"http://{HostIpTb.Text}:12000/PictionaryLibrary/User";
-
                     App.Current.mainWindow = new MainWindow(); //create a game window                 
                     App.Current.mainWindow.Show();
                     App.Current.WelcomeSplashWindow.Hide();
@@ -66,7 +61,7 @@ namespace PictionaryClient
         /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            App.Current.CloseAllWindows(e);
+            App.Current.Shutdown();
         }
     }
 }

@@ -19,8 +19,6 @@ namespace PictionaryClient
 
         public bool exiting { get; set; } // bool flag so that exiting message doesnt appear for each window closing 
 
-
-
         public string _userName { get; set; }
 
         public string _ipAddress { get; set; }
@@ -44,27 +42,6 @@ namespace PictionaryClient
             {
                 return Application.Current as App;
             }
-        }
-
-        /// <summary>
-        /// Closing helper method that closes windows properly
-        /// </summary>
-        public void CloseAllWindows(System.ComponentModel.CancelEventArgs e)
-        {
-            if (Current.exiting == false) //so that message doesnt appear for each closing 
-            {
-                MessageBoxResult answer = MessageBox.Show("Are you sure you want to exit? ", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                if (answer == MessageBoxResult.Yes)
-                {
-                    Current.exiting = true;
-                    e.Cancel = false;
-                    Current.Shutdown();
-                }
-                else
-                    e.Cancel = true;
-            }
-
         }
     }
 }
