@@ -22,6 +22,7 @@ namespace PictionaryClient
         public string _userName { get; set; }
 
         public string _ipAddress { get; set; }
+
         /// <summary>
         /// Override of startup for custom initializations to be able to happen
         /// </summary>

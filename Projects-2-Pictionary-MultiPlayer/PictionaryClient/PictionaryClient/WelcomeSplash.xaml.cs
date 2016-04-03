@@ -24,7 +24,11 @@ namespace PictionaryClient
         {
             InitializeComponent();
         }
-        
+
+        /// <summary>
+        /// Performs validation for username and ipaddress fields
+        /// starts the mainWindow for the game if all is entered properly
+        /// </summary>
         private void JoinGame_Click(object sender, RoutedEventArgs e)
         {
             var regex = @"^(([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)\.){3}([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)$";

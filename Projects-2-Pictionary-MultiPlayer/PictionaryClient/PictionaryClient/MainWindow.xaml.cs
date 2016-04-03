@@ -1,4 +1,14 @@
-﻿using System;
+﻿/// <summary>
+///     Author:     Alex Seceanschi & John Friesen
+///     Student#:   0690827 & 0666315
+///     Date:       Created: April 6, 2016
+///     Purpose:    A Visual Studio Windows WPF project called Pictionary. 
+///                     The main purpose of this project is to design a 
+///                     multi-player game application that incorporates 
+///                     multiple assemblies and WCF.
+/// </summary>
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -37,13 +47,18 @@ namespace PictionaryClient
             connectToPictionaryGame();
         }
 
+        /// <summary>
+        /// sets data context 
+        /// </summary>
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            //MyHintProperty = dw.wordHintFirstLetter_;  //set the hintProperty
+        {        
             this.DataContext = this;
             RoleSplashTb.Text += "UserName: " + App.Current._userName;
         }
 
+        /// <summary>
+        /// Configues ABCs. Shows and hides guess/draw panels based on role
+        /// </summary>
         private void connectToPictionaryGame()
         {
             try
@@ -94,12 +109,18 @@ namespace PictionaryClient
             }
         }
 
+        /// <summary>
+        /// Mouse Down event for drawing
+        /// </summary>
         private void whiteBoard_mouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (e.ButtonState == MouseButtonState.Pressed)
                 _drawPoint = e.GetPosition(whiteBoard);
         }
 
+        /// <summary>
+        /// Mouse Move event for drawing
+        /// </summary>
         private void Canvas_MouseMove_1(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed && _cnvsBrd.isDrawer(App.Current._userName))
@@ -221,8 +242,11 @@ namespace PictionaryClient
         }
         #endregion 
 
-        public delegate void CanvasUpdateDelegate(string jsonLine);
 
+        public delegate void CanvasUpdateDelegate(string jsonLine);
+        /// <summary>
+        /// sendLine callback that sends a drawn line to client window from drawer
+        /// </summary>
         public void SendLine(string jsonLine)
         {
             if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
@@ -241,14 +265,13 @@ namespace PictionaryClient
                 this.Dispatcher.BeginInvoke(new CanvasUpdateDelegate(SendLine), new object[] { jsonLine });
         }
 
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            
-            base.OnClosing(e);
-        }
+
 
         public delegate void GameUpdateDelegate(string userWinner, bool status = false);
-
+        /// <summary>
+        /// Finish current game callback that notifies winner and users that they lost
+        /// Also resets the drawer and sets a new game word and modifies UIs accordingly
+        /// </summary>
         public void FinishCurrentGame(string userWinner, bool status = false)
         {
             if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
@@ -294,7 +317,10 @@ namespace PictionaryClient
 
 
         public delegate void GameResetDelegate(string newDrawerName);
-
+        /// <summary>
+        /// Resets all clients games. This callback gets called when a drawer leaves the game.
+        /// It updates UIs accordingly and notifies all users of the new drawer.
+        /// </summary>
         public void ResetClientsGame(string newDrawerName)
         {
             if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
@@ -328,6 +354,9 @@ namespace PictionaryClient
                 this.Dispatcher.BeginInvoke(new GameResetDelegate(ResetClientsGame), new object[] { newDrawerName });
         }
 
+        /// <summary>
+        /// Button click handler for submit button
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(!_cnvsBrd.CheckWord(GuessTB.Text, App.Current._userName))
