@@ -284,7 +284,7 @@ namespace PictionaryClient
                             DrawPanel.Visibility = Visibility.Hidden;
                         }
                         else { 
-                            MessageBox.Show("Sorry " + App.Current._userName + ", you lost. " + userWinner + " won!");
+                            MessageBox.Show("Sorry " + App.Current._userName + ", you lost. " + userWinner + " won! The correct word was " + _cnvsBrd.GetWord());
                             GuessPanel.Visibility = Visibility.Visible;
                             DrawPanel.Visibility = Visibility.Hidden;
                         }
@@ -310,6 +310,7 @@ namespace PictionaryClient
         {
             if(!_cnvsBrd.CheckWord(GuessTB.Text, App.Current._userName))
                 MessageBox.Show("Sorry. Guess again!");
+            GuessTB.Text = "";
 
         }
 
