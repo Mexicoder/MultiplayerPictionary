@@ -1,13 +1,17 @@
-﻿using System;
+﻿/// <summary>
+///     Author:     Alex Seceanschi & John Friesen
+///     Student#:   0690827 & 0666315
+///     Date:       Created: April 6, 2016
+///     Purpose:    A Visual Studio C# Library project called PictionaryLibrary. 
+///                     The main purpose of this project is to implement the logic and callbacks need 
+///                     to play the game pictionay on multiple clients and get live updates of current 
+///                     standing in the game.
+/// </summary>
+
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.ServiceModel;
-using System.Windows;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Shapes;
 
 namespace PictionaryLibrary
 {

@@ -1,10 +1,18 @@
-﻿using PictionaryLibrary;
+﻿/// <summary>
+///     Author:     Alex Seceanschi & John Friesen
+///     Student#:   0690827 & 0666315
+///     Date:       Created: April 6, 2016
+///     Purpose:    A Visual Studio Console App project called PictionaryService. 
+///                     The main purpose of this project is to offer the meta data 
+///                     of our library to our clients. By doing this we are 
+///                     about to play this game with multiple client and 
+///                     over a network. NOTE: all firewall setting must be
+///                     turned off to be able to play over local network.
+/// </summary>
+
+using PictionaryLibrary;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PictionaryService
 {
