@@ -70,30 +70,37 @@ namespace PictionaryLibrary
         /// <returns></returns>
         public bool Join(string name)
         {
-            if (_userCallbacks.ContainsKey(name))
+            try
             {
-                // User alias must be unique
-                return false;
+                if (_userCallbacks.ContainsKey(name))
+                {
+                    // User alias must be unique
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine($"User Joined: {name}");
+
+                    // Retrieve client's callback proxy
+                    IUserCallback cb = OperationContext.Current.GetCallbackChannel<IUserCallback>();
+                    // Save alias and callback proxy    
+                    _userCallbacks.Add(name, cb);
+                    if (_drawWord == null)
+                    {
+                        _drawWord = DrawWord.GenerateDrawWord();
+                    }
+
+                    // the first player to join will become the Drawer for first game
+                    if (_userCallbacks.Count == 1)
+                    {
+                        _drawerUser = name;
+                    }
+                    return true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine($"User Joined: {name}");
-
-                // Retrieve client's callback proxy
-                IUserCallback cb = OperationContext.Current.GetCallbackChannel<IUserCallback>();
-                // Save alias and callback proxy    
-                _userCallbacks.Add(name, cb);
-                if (_drawWord == null)
-                {
-                    _drawWord = DrawWord.GenerateDrawWord();
-                }
-
-                // the first player to join will become the Drawer for first game
-                if (_userCallbacks.Count == 1)
-                {
-                    _drawerUser = name;
-                }
-                return true;
+                throw new Exception($"Error user couldn't join properly. User: {name}, Error Message: {ex.Message}");
             }
         }
 
@@ -103,18 +110,25 @@ namespace PictionaryLibrary
         /// <param name="name"></param>
         public void Leave(string name)
         {
-            if (_userCallbacks.ContainsKey(name))
+            try
             {
-                Console.WriteLine($"User Left: {name}");
-                if (name == _drawerUser)
+                if (_userCallbacks.ContainsKey(name))
                 {
-                    _drawerUser = _userCallbacks.Where(x => x.Key != name).FirstOrDefault().Key;
-                    foreach (var user in _userCallbacks)
+                    Console.WriteLine($"User Left: {name}");
+                    if (name == _drawerUser)
                     {
-                        user.Value.ResetClientsGame(_drawerUser);
+                        _drawerUser = _userCallbacks.FirstOrDefault(x => x.Key != name).Key;
+                        foreach (var user in _userCallbacks)
+                        {
+                            user.Value.ResetClientsGame(_drawerUser);
+                        }
                     }
+                    _userCallbacks.Remove(name);
                 }
-                _userCallbacks.Remove(name);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error user didn't exit properly. User: {name}, Error Message: {ex.Message}");
             }
         }
 
@@ -124,14 +138,22 @@ namespace PictionaryLibrary
         /// <param name="userWinner"></param>
         private void updateAllUsersGameStatus(string userWinner)
         {
-            foreach (var user in _userCallbacks)
+            try
             {
-                if (string.Equals(user.Key, userWinner, StringComparison.OrdinalIgnoreCase))
+                foreach (var user in _userCallbacks)
                 {
-                    user.Value.FinishCurrentGame(userWinner, true);
-                    continue;
+                    if (string.Equals(user.Key, userWinner, StringComparison.OrdinalIgnoreCase))
+                    {
+                        user.Value.FinishCurrentGame(userWinner, true);
+                        continue;
+                    }
+                    user.Value.FinishCurrentGame(userWinner);
                 }
-                user.Value.FinishCurrentGame(userWinner);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating all clients with game status .Error Message: " + ex.Message);
             }
         }
 
@@ -171,9 +193,16 @@ namespace PictionaryLibrary
         /// <param name="jsonLine"></param>
         public void PostLine(string jsonLine)
         {
-            _drawLine = jsonLine;
-            _drawCanvas.Add(jsonLine);
-            updateAllUsersCanvas();
+            try
+            {
+                _drawLine = jsonLine;
+                _drawCanvas.Add(jsonLine);
+                updateAllUsersCanvas();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error Posting Line .Error Message: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -200,9 +229,17 @@ namespace PictionaryLibrary
         /// </summary>
         private void updateAllUsersCanvas()
         {
-            foreach (var user in _userCallbacks.Where(x => !String.Equals(x.Key, _drawerUser, StringComparison.CurrentCultureIgnoreCase)))
+            try
             {
-                user.Value.SendLine(_drawLine);
+                foreach (var user in _userCallbacks.Where(x => !String.Equals(x.Key, _drawerUser, StringComparison.CurrentCultureIgnoreCase)))
+                {
+                    user.Value.SendLine(_drawLine);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating all clients .Error Message: " + ex.Message);
             }
         }
 
@@ -236,14 +273,22 @@ namespace PictionaryLibrary
         /// <returns></returns>
         public bool CheckWord(string word, string userName)
         {
-            if (string.Equals(word ,_drawWord.word_, StringComparison.OrdinalIgnoreCase))
+            try
             {
-                _drawWord = DrawWord.GenerateDrawWord();
-                updateAllUsersGameStatus(userName);
-                _drawerUser = userName;
-                return true;
+                if (string.Equals(word ,_drawWord.word_, StringComparison.OrdinalIgnoreCase))
+                {
+                    _drawWord = DrawWord.GenerateDrawWord();
+                    updateAllUsersGameStatus(userName);
+                    _drawerUser = userName;
+                    return true;
+                }
+                return false;
+
             }
-            return false;
+            catch (Exception ex)
+            {
+                throw new Exception("Error checking word .Error Message: " + ex.Message);
+            }
         }
 
         #endregion

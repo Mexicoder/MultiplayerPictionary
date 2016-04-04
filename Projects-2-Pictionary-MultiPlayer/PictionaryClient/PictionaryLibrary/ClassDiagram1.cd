@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PictionaryLibrary.DrawWord">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkAAAAAAAAAAAAAACAAAAAAQAAAAAAAAACACAAAAAgA=</HashCode>
+      <FileName>DrawWord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PictionaryLibrary.DrawCanvasBoard" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAAAAAEAgAgAAAUAgAAAEAAACABAJAAABEBAA=</HashCode>
+      <FileName>PictionaryLibrary.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.19" Collapsed="true" />
+  </Class>
+  <Interface Name="PictionaryLibrary.IUserCallback">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PictionaryLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PictionaryLibrary.IUser">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAAAAAEAgAAAAAUAAAAAEAAAAABAIAAAAABAA=</HashCode>
+      <FileName>PictionaryLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

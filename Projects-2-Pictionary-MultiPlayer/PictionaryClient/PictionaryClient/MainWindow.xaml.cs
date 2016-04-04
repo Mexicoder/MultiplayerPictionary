@@ -105,7 +105,7 @@ namespace PictionaryClient
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Could not connect to service. Error Message: "+ex.Message);
             }
         }
 
@@ -258,7 +258,7 @@ namespace PictionaryClient
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Could not update line .Error Message: " + ex.Message);
                 }
             }
             else
@@ -308,7 +308,7 @@ namespace PictionaryClient
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error with finish game status .Error Message: " + ex.Message);
                 }
             }
             else
@@ -347,7 +347,7 @@ namespace PictionaryClient
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error reseting client .Error Message: " + ex.Message);
                 }
             }
             else

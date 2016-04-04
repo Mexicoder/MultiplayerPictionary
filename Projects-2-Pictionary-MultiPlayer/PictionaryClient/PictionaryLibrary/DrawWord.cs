@@ -63,7 +63,6 @@ namespace PictionaryLibrary
         /// <returns></returns>
         public static DrawWord GenerateDrawWord()
         {
-
             var dwList = DrawWord.PopulateDrawWordList();
             var drawWord = DrawWord.ChooseDrawWord(dwList);
             return drawWord;
