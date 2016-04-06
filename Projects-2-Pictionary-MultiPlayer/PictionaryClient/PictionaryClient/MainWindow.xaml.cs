@@ -356,9 +356,16 @@ namespace PictionaryClient
         /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(!_cnvsBrd.CheckWord(GuessTB.Text, App.Current._userName))
-                MessageBox.Show("Sorry. Guess again!");
-            GuessTB.Text = "";
+            try
+            {
+                if(!_cnvsBrd.CheckWord(GuessTB.Text, App.Current._userName))
+                    MessageBox.Show("Sorry. Guess again!");
+                GuessTB.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving from host .Error Message: " + ex.Message);
+            }
 
         }
 
