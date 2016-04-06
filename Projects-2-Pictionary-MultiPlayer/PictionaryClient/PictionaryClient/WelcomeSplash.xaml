@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PictionaryClient"
         mc:Ignorable="d"
         Icon="img\Icon.png"
-        Title="WelcomeSplash" Height="150" Width="350" Closing="Window_Closing">
+        Title="WelcomeSplash" Height="150" Width="350" Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
