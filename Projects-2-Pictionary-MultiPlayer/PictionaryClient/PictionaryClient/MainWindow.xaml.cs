@@ -112,31 +112,39 @@ namespace PictionaryClient
         /// </summary>
         private void Canvas_MouseMove_1(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && _cnvsBrd.isDrawer(App.Current._userName))
+            try
             {
-                Line line = new Line();
-
-                line.Stroke = MyColorProperty;
-                line.StrokeThickness = MyMarkerThicknessProperty;
-
-                line.X1 = _drawPoint.X;
-                line.Y1 = _drawPoint.Y;
-                line.X2 = e.GetPosition(whiteBoard).X;
-                line.Y2 = e.GetPosition(whiteBoard).Y;
-
-                string serializedLine = new JavaScriptSerializer().Serialize(new JsonLine()
+                if (e.LeftButton == MouseButtonState.Pressed && _cnvsBrd.isDrawer(App.Current._userName))
                 {
-                    Color = MyColorProperty.Color.ToString(),
-                    StrokeThickness = line.StrokeThickness,
-                    X1 = line.X1,
-                    Y1 = line.Y1,
-                    X2 = line.X2,
-                    Y2 = line.Y2
-                });
+                    Line line = new Line();
 
-                _cnvsBrd.PostLine(serializedLine);
-                _drawPoint = e.GetPosition(whiteBoard);
-                whiteBoard.Children.Add(line);
+                    line.Stroke = MyColorProperty;
+                    line.StrokeThickness = MyMarkerThicknessProperty;
+
+                    line.X1 = _drawPoint.X;
+                    line.Y1 = _drawPoint.Y;
+                    line.X2 = e.GetPosition(whiteBoard).X;
+                    line.Y2 = e.GetPosition(whiteBoard).Y;
+
+                    string serializedLine = new JavaScriptSerializer().Serialize(new JsonLine()
+                    {
+                        Color = MyColorProperty.Color.ToString(),
+                        StrokeThickness = line.StrokeThickness,
+                        X1 = line.X1,
+                        Y1 = line.Y1,
+                        X2 = line.X2,
+                        Y2 = line.Y2
+                    });
+
+                    _cnvsBrd.PostLine(serializedLine);
+                    _drawPoint = e.GetPosition(whiteBoard);
+                    whiteBoard.Children.Add(line);
+                }
+            }
+            catch (Exception ex )
+            {
+                MessageBox.Show("Could not update. Please check connection .\nError Message: " + ex.Message);
+
             }
         }
 

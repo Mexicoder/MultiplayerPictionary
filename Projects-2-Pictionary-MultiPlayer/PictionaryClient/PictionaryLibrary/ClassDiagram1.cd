@@ -1,14 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Comment CommentText="Data Contract&#xD;&#xA;                   l&#xD;&#xA;	  V">
+    <Position X="3.844" Y="0.5" Height="0.896" Width="1.44" />
+  </Comment>
+  <Comment CommentText="Service Contract&#xD;&#xA;                   l&#xD;&#xA;	  V">
+    <Position X="12.125" Y="0.5" Height="0.688" Width="1.158" />
+  </Comment>
+  <Comment CommentText="Callback Contract&#xD;&#xA;                   l&#xD;&#xA;	  V">
+    <Position X="7.698" Y="0.5" Height="0.792" Width="1.283" />
+  </Comment>
   <Class Name="PictionaryLibrary.DrawWord">
-    <Position X="2.5" Y="1.75" Width="1.5" />
+    <Position X="6.75" Y="4.75" Width="6" />
     <TypeIdentifier>
       <HashCode>AkAAAAAAAAAAAAAACAAAAAAQAAAAAAAAACACAAAAAgA=</HashCode>
       <FileName>DrawWord.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PictionaryLibrary.DrawCanvasBoard" BaseTypeListCollapsed="true">
-    <Position X="4.25" Y="1.75" Width="1.5" />
+    <Position X="3" Y="1.75" Width="3.5" />
     <TypeIdentifier>
       <HashCode>EAEAAAAAAAAAEAgAgAAAUAgAAAEAAACABAJAAABEBAA=</HashCode>
       <FileName>PictionaryLibrary.cs</FileName>
@@ -16,14 +25,14 @@
     <Lollipop Position="0.19" Collapsed="true" />
   </Class>
   <Interface Name="PictionaryLibrary.IUserCallback">
-    <Position X="6" Y="1.75" Width="1.5" />
+    <Position X="6.75" Y="1.75" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AACABAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>PictionaryLibrary.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="PictionaryLibrary.IUser">
-    <Position X="7.75" Y="1.75" Width="1.5" />
+    <Position X="11.25" Y="1.75" Width="3.5" />
     <TypeIdentifier>
       <HashCode>EAEAAAAAAAAAEAgAAAAAUAAAAAEAAAAABAIAAAAABAA=</HashCode>
       <FileName>PictionaryLibrary.cs</FileName>
