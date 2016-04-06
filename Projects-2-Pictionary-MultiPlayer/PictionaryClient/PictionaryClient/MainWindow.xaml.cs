@@ -377,16 +377,22 @@ namespace PictionaryClient
             if (App.Current.exiting == false) //so that message doesnt appear for each closing 
             {
                 MessageBoxResult answer = MessageBox.Show("Are you sure you want to exit? ", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                if (answer == MessageBoxResult.Yes)
+                try
                 {
-                    _cnvsBrd?.Leave(App.Current._userName);
-                    App.Current.exiting = true;
-                    e.Cancel = false;
-                    App.Current.Shutdown();
+                    if (answer == MessageBoxResult.Yes)
+                    {
+                        _cnvsBrd?.Leave(App.Current._userName);
+                        App.Current.exiting = true;
+                        e.Cancel = false;
+                        App.Current.Shutdown();
+                    }
+                    else
+                        e.Cancel = true;
                 }
-                else
-                    e.Cancel = true;
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error with host .Error Message: " + ex.Message);
+                }
             }
         }
     }
